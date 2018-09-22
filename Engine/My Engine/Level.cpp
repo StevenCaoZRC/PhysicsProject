@@ -46,8 +46,8 @@ void CLevel::addPlayer()
 	//Creating Player
 	Player = make_shared<CPlayer>();
 	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 0.0f, 0.0f);
-	Player->init2D(2.0f, { {8,-5.5,1.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,1.0f } }, Utility::BIRD);
-	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	Player->init2D(2.0f, { {-8,-5.5,0.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,1.0f } }, Utility::BIRD);
+	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.3f, 0.5f);
 	//CharacterSpr->addFrame("Resources/player_character/character_jump_0.png");
 	AddEntity(Player);
 }
@@ -67,20 +67,21 @@ void CLevel::addLevelObj()
 	std::shared_ptr<CEntity>Background = make_shared<CEntity>();
 	Background->CreateEntity2D("Resources/Backgrounds/blue_grass.png",Utility::SCR_WIDTH, Utility::SCR_HEIGHT);
 	Background->init2D({ { 0.0f,-2.0f,0.0f },{0,0,0},{ 0.025f,0.035f,0.025f } }, Utility::BACKGROUND);
+
 	std::shared_ptr<CEntity>Floor = make_shared<CEntity>();
 	Floor->CreateEntity2D("Resources/other/floor.png", 0, 0);
 	Floor->init2D({ { 0 ,-10.0f,0.0f },{ 0,0,0 },{ 0.02f,0.02f,0.02f } }, Utility::INDESOJBECTS);
-	//Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
+	Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true, 0.3f, 0.0f);
 
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 0, 0);
 	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0135f,0.0135f,0.0135f } }, Utility::INDESOJBECTS);
-	//CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
+	CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 0, 0);
 	StickofSling->init2D({ { -8 ,-7.5f,0.0f },{ 0,0,0 },{ 0.005f,0.01f,0.01f } }, Utility::INDESOJBECTS);
-	//StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
+	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);
@@ -96,7 +97,10 @@ void CLevel::render()
 void CLevel::update()
 {
 	CScene::update();
-	
+	float32 timeStep = 1.0 / 60.0f;
+	int32 velocityIteration = 6;
+	int32 positionInteration = 2;
+	world.Step(timeStep, velocityIteration, positionInteration);
 }
 
 void CLevel::resetLevel()

@@ -175,7 +175,8 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	case 0:
 	{
 		b2PolygonShape b2DynamicShape;
-		b2DynamicShape.SetAsBox((float)(m_iWidth / 2), (float)(m_iHeight / 2));
+		
+		b2DynamicShape.SetAsBox((m_iWidth /2.0f),(m_iHeight /2.0f/80.0f));
 		if (bHasFixture)
 		{
 			//Define fixture
@@ -188,13 +189,17 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 			//add this fixture to the body
 			bodyb2d->CreateFixture(&fixtureDef);
 		}
+		else
+		{
+			bodyb2d->CreateFixture(&b2DynamicShape, 0.0f);
+		}
 		break;
 	}
 	case 1:
 	{
 		b2CircleShape b2Circle;
-		b2Circle.m_p.Set(0, 0);
-		b2Circle.m_radius = (float)(m_iWidth / 2);
+		b2Circle.m_p.Set(0.0f,0.0f);
+		b2Circle.m_radius = (GetWidth() / 2.0f/80.0f);
 		if (bHasFixture)
 		{
 			//Define fixture
@@ -206,6 +211,10 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 			fixtureDef.friction = fFriction;
 			//add this fixture to the body
 			bodyb2d->CreateFixture(&fixtureDef);
+		}
+		else
+		{
+			bodyb2d->CreateFixture(&b2Circle, 0.0f);
 		}
 		break;
 	}
