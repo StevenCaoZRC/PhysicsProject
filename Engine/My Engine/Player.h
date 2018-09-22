@@ -40,7 +40,7 @@ public:
 	~CPlayer();
 	void init2D(float _fMass, Utility::Transform transform, Utility::Tags IDTags);
 	void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
-	void update();
+	void Update2D();
 	bool bIsPlayerAlive = true;
 private:
 

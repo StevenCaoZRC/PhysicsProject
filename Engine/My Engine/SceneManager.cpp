@@ -67,7 +67,6 @@ void CSceneManager::init()
 	//creaing a shared pointer to level and bgSprite and CharacterSpr
 	//Adding the spr to level
 	shared_ptr<CLevel>Level = make_shared<CLevel>();
-
 	Level->addLevelObj();
 	Level->addPlayer();
 	//Adding the level to scenemanager

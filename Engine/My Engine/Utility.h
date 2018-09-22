@@ -54,7 +54,7 @@ public:
 namespace Utility
 {
 	const unsigned int SCR_WIDTH = 1000;
-	const unsigned int SCR_HEIGHT = 850;
+	const unsigned int SCR_HEIGHT = 800;
 
 	//Used for the fixtures
 	enum Shapes
@@ -81,9 +81,9 @@ namespace Utility
 
 	struct Transform
 	{
-		glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
+		glm::vec3 position;
+		glm::vec3 rotation;
+		glm::vec3 scale;
 	};
 	//Used to identify objects
 	enum Tags

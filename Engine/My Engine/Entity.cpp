@@ -148,6 +148,8 @@ void CEntity::Render2D(GLuint _programID)
 
 void CEntity::Update2D()
 {
+	
+	
 }
 
 void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fFriction, float fDensity)
@@ -167,6 +169,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	//Only sets fix rotation if the passed in value is false(therefore cannot rotate)
 	bodyb2d->SetFixedRotation(!bRotatable);
 	//Decides to the shape
+
 	switch (Shape)
 	{
 	case 0:

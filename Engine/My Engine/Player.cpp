@@ -39,7 +39,7 @@ void CPlayer::init2D(float _fMass, Utility::Transform transform, Utility::Tags I
 	objScale = transform.scale;
 	objRotate = transform.rotation;
 	m_fMass = _fMass;
-	fGravity = 0.5f;
+	//fGravity = 0.5f;
 
 	//---------------|Sound Stuff|---------------//
 	//CSound::GetInstance()->init();
@@ -53,8 +53,15 @@ void CPlayer::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 	CEntity::CreateEntity2D(_filePath, iWidth, iHeight);
 }
 
-void CPlayer::update()
+void CPlayer::Update2D()
 {
+	if (bodyb2d)
+	{
+		b2Vec2 BodyPosition = bodyb2d->GetPosition();
+		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
+		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
+	}
+	cout << objPosition.y << endl;
 	////Casting current level scene to dirived type CLevel, if it is not Clevel will return nullptr
 	//std::shared_ptr<CLevel>RefrenceLevel = std::dynamic_pointer_cast<CLevel>(CSceneManager::GetInstance()->GetCurrentScene());
 	//if (!RefrenceLevel)
@@ -150,6 +157,9 @@ void CPlayer::update()
 	////CSound::GetInstance()->soundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel);
 
 
-	//objPosition += glm::vec3(v2_Movement, 0);
+	//objPosition += glm::vec3(v2_Movement, 0);\
+	
+
+
 }
 
