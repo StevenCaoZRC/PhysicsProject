@@ -4,14 +4,13 @@
 // Auckland
 // New Zealand
 //
-// (c) 2005 - 2017 Media Design School
+// (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CLevel.cpp
-// Description	:	main implementation for CLevel
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Level.cpp
+// Description	:	main implementation for Level
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
-
 // Library Includes //
 #include <vector>
 // Local Includes //
@@ -29,9 +28,9 @@ using namespace std;
 
 // Constructor //
 CLevel::CLevel()
+	:world(b2Vec2(0.0f, -9.81f))
 {
-
-
+	world.SetGravity(b2Vec2(0.0f, -gravity));
 }
 
 // Destructor //
@@ -48,6 +47,7 @@ void CLevel::addPlayer()
 	Player = make_shared<CPlayer>();
 	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 0.0f, 0.0f);
 	Player->init2D(2.0f, { {-8,-5.5,1.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,0.01f } }, Utility::BIRD);
+	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.3f, 100.0f);
 	//CharacterSpr->addFrame("Resources/player_character/character_jump_0.png");
 	AddEntity(Player);
 }
@@ -70,14 +70,17 @@ void CLevel::addLevelObj()
 	std::shared_ptr<CEntity>Floor = make_shared<CEntity>();
 	Floor->CreateEntity2D("Resources/other/floor.png", 0, 0);
 	Floor->init2D({ { 0 ,-10.0f,0.0f },{ 0,0,0 },{ 0.02f,0.02f,0.02f } }, Utility::INDESOJBECTS);
+	Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
 
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 0, 0);
-	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0125f,0.0125f,0.0125f } }, Utility::INDESOJBECTS);
+	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0135f,0.0135f,0.0135f } }, Utility::INDESOJBECTS);
+	CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
+
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 0, 0);
 	StickofSling->init2D({ { -8 ,-7.5f,0.0f },{ 0,0,0 },{ 0.005f,0.01f,0.01f } }, Utility::INDESOJBECTS);
-
+	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, false);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);

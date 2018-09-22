@@ -7,12 +7,10 @@
 // (c) 2005 - 2018 Media Design School
 //
 // File Name	:	Player.cpp
-// Description	:	main implementation for CPlayer
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// Description	:	main implementation for Player
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
-
-// Library Includes //
 
 // Local Includes //
 #include "Interface.h"

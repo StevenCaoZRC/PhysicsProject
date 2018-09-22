@@ -1,3 +1,16 @@
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2005 - 2018 Media Design School
+//
+// File Name	:	Camera.h
+// Description	:	header file outlining the Camera
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
+//
 #pragma once
 
 //Local Include 
@@ -46,8 +59,11 @@ private:
 	glm::mat4 m_m4Translate;
 	glm::mat4 m_m4Rotate;
 	//---------------| Camera Vectors |-----------------//
+	//Position of the camera in world space
 	glm::vec3 m_v3CamPos = glm::vec3(0.0f, 0.0f, 3.0f);
+	//The direction the camera is facing (z negitive is looking into the screen)
 	glm::vec3 m_v3CamForward = glm::vec3(0.0f, 0.0f, -1.0f);
+	//Camera Elevation
 	glm::vec3 m_v3CamUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 //Singleton

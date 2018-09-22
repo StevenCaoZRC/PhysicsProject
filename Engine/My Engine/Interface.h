@@ -1,16 +1,15 @@
-#pragma once
 //
 // Bachelor of Software Engineering
 // Media Design School
 // Auckland
 // New Zealand
 //
-// (c) 2005 - 2017 Media Design School
+// (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CInterface.h
-// Description	:	header file outlining the CInterface
-// Author		:	Steven Cao
-// Mail			:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Interface.h
+// Description	:	header file outlining the Interface
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 
 #pragma once

@@ -6,10 +6,10 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CSceneManager.cpp
-// Description	:	main implementation for CSceneManager
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// File Name	:	SceneManager.cpp
+// Description	:	main implementation for SceneManager
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 
 // Library Includes //

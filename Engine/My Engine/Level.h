@@ -1,16 +1,15 @@
-#pragma once
 //
 // Bachelor of Software Engineering
 // Media Design School
 // Auckland
 // New Zealand
 //
-// (c) 2005 - 2017 Media Design School
+// (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CLevel.h
-// Description	:	header file outlining the CLevel
-// Author		:	Steven Cao
-// Mail			:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Level.h
+// Description	:	header file outlining the Level
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 
 #pragma once
@@ -45,6 +44,9 @@ public:
 	void render();
 	void update();
 	void resetLevel();
+
+	b2World world;
+	
 	//void delEnemy(std::shared_ptr<CEnemy>);
 	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
 private:
@@ -52,7 +54,7 @@ private:
 	std::shared_ptr<CEntity>EndSpr;
 	std::shared_ptr<CEntity>CircleofSling;
 	int nScore = 0;
-	b2World
+	float gravity = 9.81f;
 };
 
 #endif // _CLEVEL_H__

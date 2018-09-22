@@ -1,3 +1,16 @@
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2005 - 2018 Media Design School
+//
+// File Name	:	Entity.cpp
+// Description	:	main implementation for Entity
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
+//
 #include "Entity.h"
 
 CEntity::CEntity()
@@ -10,7 +23,9 @@ CEntity::~CEntity()
 
 void CEntity::init2D(Utility::Transform transform, Utility::Tags IDTags)
 {
+	// Determines what type of object it is. Either bird, pig, destructable objects, indestructable objects and background
 	iTags = IDTags;
+	//Sets the transform of the Entity
 	objPosition = transform.position;
 	objRotate = transform.rotation;
 	objScale = transform.scale;
@@ -21,7 +36,8 @@ void CEntity::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 {
 
 	int HalfWidth = iWidth / 2;
-	int HalfHeight =iHeight / 2;
+	int HalfHeight = iHeight / 2;
+	//if the passed in height and width is zero then it will get the images height and width
 	if (iWidth == 0 || iHeight == 0)
 	{
 		int nWidth, nHeight;
@@ -134,59 +150,67 @@ void CEntity::Update2D()
 {
 }
 
-void CEntity::CreateB2Body(b2World & b2dWorld, b2BodyType BodyType, bool bRotatable, bool bHasFixture, float fFriction, float fDensity, Utility::Shapes Shape)
+void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fFriction, float fDensity)
 {
-	if (this)
+	//Creating a body definition
+	b2BodyDef bodyDef;
+	//Define which body type, Dynamic, Static or Kinematic
+	bodyDef.type = BodyType;
+	//Sets the position of the body to the same position as the game entity 
+	bodyDef.position.Set(objPosition.x, objPosition.y);
+	//Box2D version of a pointer, which points from a physics object to a game entity
+	bodyDef.userData = &*this;
+	//Create body
+	bodyb2d = b2dWorld.CreateBody(&bodyDef);
+	//Set the transform of the physics object according to the transform of the game entity
+	bodyb2d->SetTransform(bodyDef.position, (objRotate.z / 180) * b2_pi);
+	//Only sets fix rotation if the passed in value is false(therefore cannot rotate)
+	bodyb2d->SetFixedRotation(!bRotatable);
+	//Decides to the shape
+	switch (Shape)
 	{
-		b2BodyDef bodyDef;
-		bodyDef.type = BodyType;
-		bodyDef.position.Set(objPosition.x, objPosition.y);
-		bodyDef.userData = &*this;
-		bodyb2d = b2dWorld.CreateBody(&bodyDef);
-		bodyb2d->SetTransform(bodyDef.position, (objRotate.z / 180) * b2_pi);
-		bodyb2d->SetFixedRotation(!bRotatable);
-		switch (Shape)
+	case 0:
+	{
+		b2PolygonShape b2DynamicShape;
+		b2DynamicShape.SetAsBox((float)(m_iWidth / 2), (float)(m_iHeight / 2));
+		if (bHasFixture)
 		{
-		case 0:
-		{
-			b2PolygonShape b2DynamicShape;
-			b2DynamicShape.SetAsBox((float)(m_iWidth / 2), (float)(m_iHeight / 2));
-			if (bHasFixture)
-			{
-				//Define fixture
-				b2FixtureDef fixtureDef;
-				fixtureDef.shape = &b2DynamicShape;
-				//Setting the density
-				fixtureDef.density = fDensity;
-				//Setting the friction
-				fixtureDef.friction = fFriction;
-				//add this fixture to the body
-				bodyb2d->CreateFixture(&fixtureDef);
-			}
-			break;
+			//Define fixture
+			b2FixtureDef fixtureDef;
+			fixtureDef.shape = &b2DynamicShape;
+			//Setting the density
+			fixtureDef.density = fDensity;
+			//Setting the friction
+			fixtureDef.friction = fFriction;
+			//add this fixture to the body
+			bodyb2d->CreateFixture(&fixtureDef);
 		}
-		case 1:
-		{
-			b2CircleShape b2Circle;
-			b2Circle.m_p.Set(0, 0);
-			b2Circle.m_radius = (float)(m_iWidth / 2);
-			if (bHasFixture)
-			{
-				//Define fixture
-				b2FixtureDef fixtureDef;
-				fixtureDef.shape = &b2Circle;
-				//Setting the density
-				fixtureDef.density = fDensity;
-				//Setting the friction
-				fixtureDef.friction = fFriction;
-				//add this fixture to the body
-				bodyb2d->CreateFixture(&fixtureDef);
-			}
-			break;
-		}
-		default:
-			break;
-		}
+		break;
 	}
+	case 1:
+	{
+		b2CircleShape b2Circle;
+		b2Circle.m_p.Set(0, 0);
+		b2Circle.m_radius = (float)(m_iWidth / 2);
+		if (bHasFixture)
+		{
+			//Define fixture
+			b2FixtureDef fixtureDef;
+			fixtureDef.shape = &b2Circle;
+			//Setting the density
+			fixtureDef.density = fDensity;
+			//Setting the friction
+			fixtureDef.friction = fFriction;
+			//add this fixture to the body
+			bodyb2d->CreateFixture(&fixtureDef);
+		}
+		break;
+	}
+	default:
+	{break; }
+
+	}
+	
+	
 }
 

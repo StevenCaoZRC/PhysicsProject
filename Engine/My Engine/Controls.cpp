@@ -6,10 +6,10 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CControls.cpp
-// Description	:	main implementation for CControls
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Controls.cpp
+// Description	:	main implementation for Controls
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 
 // Library Includes //
@@ -50,9 +50,10 @@ void CControls::DestroyInstance()
 
 void CControls::init()
 {
+	//Sets the keyboard call back to current window
 	glutKeyboardFunc(InitKeyDown);
+	//Sets the keyboard on release call back to current window
 	glutKeyboardUpFunc(InitKeyUp);
-
 }
 
 void CControls::update()

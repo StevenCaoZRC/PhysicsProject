@@ -1,3 +1,16 @@
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2005 - 2018 Media Design School
+//
+// File Name	:	Entity.h
+// Description	:	header file outlining the Entity
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
+//
 #pragma once
 
 // Global Include
@@ -26,7 +39,7 @@ public:
 	
 	//Box2D Stuff
 	b2Body* bodyb2d = nullptr;
-	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, bool bRotatable, bool bHasFixture, float fFriction, float fDensity, Utility::Shapes Shape);
+	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true, float fFriction = 0.3f, float fDensity = 1.0f);
 protected:
 		float m_fMass;
 		float fGravity;

@@ -1,3 +1,17 @@
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2005 - 2018 Media Design School
+//
+// File Name	:	Utility.h
+// Description	:	header file outlining the Utility
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
+//
+
 #pragma once
 
 //---OpenGL Includes---//
@@ -42,12 +56,14 @@ namespace Utility
 	const unsigned int SCR_WIDTH = 1000;
 	const unsigned int SCR_HEIGHT = 850;
 
+	//Used for the fixtures
 	enum Shapes
 	{
 		POLYGON = 0,
 		CIRCLE,
 	};
 
+	//Used for controls keyboard
 	enum InputState
 	{
 		INPUT_FIRST_RELEASE,	// First frame of Up state 
@@ -55,7 +71,7 @@ namespace Utility
 		INPUT_FIRST_PRESS,		// First frame of Down state 
 		INPUT_HOLD,				// Key is held Down 
 	};
-
+	//Used for controls mouse
 	enum InputMouse
 	{
 		MOUSE_LEFT,
@@ -69,11 +85,11 @@ namespace Utility
 		glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	};
-
+	//Used to identify objects
 	enum Tags
 	{
 		BIRD = 0,
-		PIGS,
+		PIG,
 		DESOBJECTS,
 		INDESOJBECTS,
 		BACKGROUND,

@@ -4,27 +4,20 @@
 // Auckland
 // New Zealand
 //
-// (c) 2005 - 2017 Media Design School
+// (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CSound.cpp
-// Description	:	main implementation for CSound
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Sound.cpp
+// Description	:	main implementation for Sound
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
-
-// Library Includes //
-
-// Local Includes //
 
 // This Includes //
 #include "Sound.h"
 
-// Static Variables //
-
-// Static Function Prototypes //
-
 // Types //
 using namespace std;
+
 CSound * CSound::pSound;
 CSound * CSound::GetInstance()
 {

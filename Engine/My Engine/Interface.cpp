@@ -4,20 +4,18 @@
 // Auckland
 // New Zealand
 //
-// (c) 2005 - 2017 Media Design School
+// (c) 2005 - 2018 Media Design School
 //
-// File Name	:	CInterface.cpp
-// Description	:	main implementation for CInterface
-// Author		:	Steven Cao
-// Mail 		:	steven.zha7447@mediadesign.school.nz
+// File Name	:	Interface.cpp
+// Description	:	main implementation for Interface
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
-
-// Library Includes //
 
 // Local Includes //
-//#include "CControls.h"
-//#include "CSceneManager.h"
-//#include "CLevel.h"
+#include "Controls.h"
+#include "SceneManager.h"
+#include "Level.h"
 #include "TextLabel.h"
 //#include "CEnemy.h"
 // This Includes //

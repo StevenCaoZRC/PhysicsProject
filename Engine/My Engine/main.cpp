@@ -7,11 +7,10 @@
 // (c) 2005 - 2018 Media Design School
 //
 // File Name	:	main.cpp
-// Description	:	main implementation for program
-// Author		:	Steven Cao
-// Mail			:	steven.zha7447@mediadesign.school.nz
+// Description	:	main implementation for the program
+// Author		:	Steven Cao & Vivian Ngo
+// Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
-
 // Library Includes //
 #include <iostream>
 
