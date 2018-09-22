@@ -61,7 +61,7 @@ void CPlayer::Update2D()
 		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
-	cout << objPosition.y << endl;
+	//cout << objPosition.y << endl;
 	////Casting current level scene to dirived type CLevel, if it is not Clevel will return nullptr
 	//std::shared_ptr<CLevel>RefrenceLevel = std::dynamic_pointer_cast<CLevel>(CSceneManager::GetInstance()->GetCurrentScene());
 	//if (!RefrenceLevel)

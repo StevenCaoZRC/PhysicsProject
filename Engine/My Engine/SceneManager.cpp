@@ -45,8 +45,9 @@ void CSceneManager::DestroyInstance()
 
 void CSceneManager::RenderCurrent()
 {
-	Scenes[nCurrentScene]->render(); //Rending the current scene 
 
+	Scenes[nCurrentScene]->render(); //Rending the current scene 
+	
 }
 
 void CSceneManager::UpdateCurrent()
@@ -69,6 +70,8 @@ void CSceneManager::init()
 	shared_ptr<CLevel>Level = make_shared<CLevel>();
 	Level->addLevelObj();
 	Level->addPlayer();
+	Level->addText();
+
 	//Adding the level to scenemanager
 	//---------------|Menu Scenes Stuff|---------------//
 	//---------------|End Scenes Stuff|---------------//

@@ -15,7 +15,7 @@
 #include <vector>
 // Local Includes //
 #include "Interface.h"
-#include "TextLabel.h"
+#include "Controls.h"
 // This Includes //
 #include "Level.h"
 
@@ -45,8 +45,8 @@ void CLevel::addPlayer()
 	float StartHeight = CircleofSling->GetHeight() / 2.0f; 
 	//Creating Player
 	Player = make_shared<CPlayer>();
-	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 0.0f, 0.0f);
-	Player->init2D(2.0f, { {-8,-5.5,0.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,1.0f } }, Utility::BIRD);
+	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 0, 0);
+	Player->init2D(2.0f, { {-10,0,0.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,1.0f } }, Utility::BIRD);
 	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.3f, 0.5f);
 	//CharacterSpr->addFrame("Resources/player_character/character_jump_0.png");
 	AddEntity(Player);
@@ -70,22 +70,34 @@ void CLevel::addLevelObj()
 
 	std::shared_ptr<CEntity>Floor = make_shared<CEntity>();
 	Floor->CreateEntity2D("Resources/other/floor.png", 0, 0);
-	Floor->init2D({ { 0 ,-10.0f,0.0f },{ 0,0,0 },{ 0.02f,0.02f,0.02f } }, Utility::INDESOJBECTS);
+	Floor->init2D({ { 0 ,-10.0f,0.0f },{ 0,0,0 },{ 0.02f,0.02f,0.02f } }, Utility::INDESOBJECTS);
 	Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true, 0.3f, 0.0f);
 
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 0, 0);
-	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0135f,0.0135f,0.0135f } }, Utility::INDESOJBECTS);
+	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0135f,0.0135f,0.0135f } }, Utility::INDESOBJECTS);
 	CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 0, 0);
-	StickofSling->init2D({ { -8 ,-7.5f,0.0f },{ 0,0,0 },{ 0.005f,0.01f,0.01f } }, Utility::INDESOJBECTS);
+	StickofSling->init2D({ { -8 ,-7.5f,0.0f },{ 0,0,0 },{ 0.005f,0.01f,0.01f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);
 	AddEntity(CircleofSling);
+}
+
+void CLevel::addText()
+{
+	auto xText = std::make_shared<TextLabel>("x: ", "Resources/Fonts/bubble.TTF", glm::vec2());
+	auto yText = std::make_shared<TextLabel>("y: ", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH / 2, 0.0f));
+	//auto lives = std::make_shared<TextLabel>("Lives: ", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH / 2, 0.0f));
+	xText->SetScale(0.5f);
+	yText->SetScale(0.5f);
+
+	m_mTextList["MouseX"] = std::move(xText);
+	m_mTextList["MouseY"] = std::move(yText);
 }
 
 void CLevel::render()
@@ -97,10 +109,14 @@ void CLevel::render()
 void CLevel::update()
 {
 	CScene::update();
-	float32 timeStep = 1.0 / 60.0f;
+	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIteration = 6;
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
+
+	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(CControls::m_fMouseX));
+	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(CControls::m_fMouseY));
+
 }
 
 void CLevel::resetLevel()

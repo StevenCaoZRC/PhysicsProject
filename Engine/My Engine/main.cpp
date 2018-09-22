@@ -40,10 +40,11 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(Utility::SCR_WIDTH, Utility::SCR_HEIGHT);
 	glutCreateWindow("My Game");
-
 	glewInit();
 	CSceneManager::GetInstance()->init();
-
+	CControls::GetInstance()->init();
+	glutPassiveMotionFunc(CControls::GetInstance()->MousePassiveMovement);
+	glutMotionFunc(CControls::GetInstance()->MouseHoldMovement);
 
 	glutDisplayFunc(render);
 	glutIdleFunc(Update);

@@ -31,13 +31,20 @@ CScene::CScene()
 CScene::~CScene()
 {
 	V_EntitiesInScene.clear();
+	m_mTextList.clear();
 }
 
 void CScene::render()
 {
+
 	for (auto it : V_EntitiesInScene)
 	{
 		it->Render2D(CUtility::program);
+	}
+
+	for (auto it : m_mTextList)
+	{
+		it.second->Render();
 	}
 }
 
@@ -46,7 +53,6 @@ void CScene::update()
 	for (auto it : V_EntitiesInScene)
 	{
 		it->Update2D();
-
 	}
 }
 

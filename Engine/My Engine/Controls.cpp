@@ -22,6 +22,21 @@
 // Types //
 using namespace std;
 CControls* CControls::m_pControls; //Redefining the static variable for class
+unsigned char CControls::cSpecKeyState[255];
+unsigned char CControls::cMouse[3];
+
+GLfloat CControls::MouseSensitivity = 0.05f;
+GLfloat CControls::Yaw = 0.0f;
+GLfloat CControls::Pitch = 0.0f;
+GLfloat CControls::Roll = 0.0f;
+GLfloat CControls::LastX = 0.0f;
+GLfloat CControls::LastY = 0.0f;
+GLfloat CControls::xOffset = 0.0f;
+GLfloat CControls::yOffset = 0.0f;
+bool CControls::FirstMouse = true;
+float CControls::m_fMouseX = 0.0f;
+float CControls::m_fMouseY = 0.0f;
+
 CControls::CControls()
 {
 }
@@ -54,6 +69,14 @@ void CControls::init()
 	glutKeyboardFunc(InitKeyDown);
 	//Sets the keyboard on release call back to current window
 	glutKeyboardUpFunc(InitKeyUp);
+
+	glutSpecialFunc(SpecialKeyPress);
+	glutSpecialUpFunc(SpecialKeyRelease);
+
+	glutPassiveMotionFunc(MousePassiveMovement);
+	glutMotionFunc(MouseHoldMovement);
+	glutMouseFunc(Mouse);
+
 }
 
 void CControls::update()
@@ -102,3 +125,126 @@ void CControls::Mouse(int nButton, int nGlutState, int nX, int nY)
 	}
 }
 
+void CControls::MousePassiveMovement(int x, int y)
+{
+	m_fMouseX = (float)x;
+	m_fMouseY = (float)y;
+	if (FirstMouse == true)// Run only once to initialize the 'Last' vars
+	{
+		LastX = (GLfloat)x;
+		LastY = (GLfloat)y;
+		FirstMouse = false;
+	}
+
+	LastX = (GLfloat)x;
+	LastY = (GLfloat)y;
+
+	xOffset *= MouseSensitivity;
+	yOffset *= MouseSensitivity;
+
+	Yaw -= xOffset;
+	Pitch -= yOffset;
+
+	// Clamp 'Pitch' so screen doesn’t flip
+	if (Pitch > 89.0f)
+	{
+		Pitch = 89.0f;
+	}
+	if (Pitch < -89.0f)
+	{
+		Pitch = -89.0f;
+	}
+}
+
+void CControls::MouseHoldMovement(int x, int y)
+{
+	if (cMouse[0] == INPUT_HOLD)
+	{
+		if (FirstMouse == true)// Run only once to initialize the 'Last' vars
+		{
+			LastX = (GLfloat)x;
+			LastY = (GLfloat)y;
+			FirstMouse = false;
+		}
+		std::cout << "bleH" << std::endl;
+		m_fMouseX = (float)x;
+		m_fMouseY = (float)y;
+
+		GLfloat xOffset = (GLfloat)x - LastX;
+		GLfloat yOffset = (GLfloat)y - LastY;
+
+		LastX = (GLfloat)x;
+		LastY = (GLfloat)y;
+
+		xOffset *= MouseSensitivity + 0.05f;
+		yOffset *= MouseSensitivity + 0.05f;
+
+		Yaw -= xOffset;
+
+		Pitch -= yOffset;
+
+		if (Pitch > 89.0f)
+		{
+			Pitch = 89.0f;
+		}
+		if (Pitch < -89.0f)
+		{
+			Pitch = -89.0f;
+		}
+	}
+}
+
+void CControls::SpecialKeyPress(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP:
+	{
+		cSpecKeyState[0] = INPUT_HOLD;
+		break;
+	}
+	case GLUT_KEY_DOWN:
+	{
+		cSpecKeyState[1] = INPUT_HOLD;
+		break;
+	}
+	case GLUT_KEY_LEFT:
+	{
+		cSpecKeyState[2] = INPUT_HOLD;
+		break;
+	}
+	case GLUT_KEY_RIGHT:
+	{
+		cSpecKeyState[3] = INPUT_HOLD;
+		break;
+	}
+	}
+}
+
+void CControls::SpecialKeyRelease(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP:
+	{
+		cSpecKeyState[0] = INPUT_RELEASED;
+		break;
+	}
+	case GLUT_KEY_DOWN:
+	{
+		cSpecKeyState[1] = INPUT_RELEASED;
+		break;
+
+	}
+	case GLUT_KEY_LEFT:
+	{
+		cSpecKeyState[2] = INPUT_RELEASED;
+		break;
+	}
+	case GLUT_KEY_RIGHT:
+	{
+		cSpecKeyState[3] = INPUT_RELEASED;
+		break;
+	}
+	}
+}

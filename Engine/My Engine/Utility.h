@@ -91,7 +91,7 @@ namespace Utility
 		BIRD = 0,
 		PIG,
 		DESOBJECTS,
-		INDESOJBECTS,
+		INDESOBJECTS,
 		BACKGROUND,
 	};
 

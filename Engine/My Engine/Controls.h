@@ -36,17 +36,24 @@ public:
 	static void DestroyInstance();
 
 	unsigned char cKeyState[255];
-	unsigned char cMouse[3];
+	static unsigned char cSpecKeyState[255];
+	static unsigned char cMouse[3];
+
+	static float m_fMouseX;
+	static float m_fMouseY;
+
 	void init();
 	void update();
 	static void InitKeyDown(unsigned char cKey, int nX, int nY);
 	static void InitKeyUp(unsigned char cKey, int nX, int nY);
 	void KeyDown(unsigned char cKey, int nX, int nY);
 	void KeyUp(unsigned char cKey, int nX, int nY);
+	static void SpecialKeyPress(int key, int x, int y);
+	static void SpecialKeyRelease(int key, int x, int y);
 
-
-	void Mouse(int nButton, int nGlutState, int nX, int nY);
-
+	static void Mouse(int nButton, int nGlutState, int nX, int nY);
+	static void MousePassiveMovement(int x, int y);
+	static void MouseHoldMovement(int x, int y);
 
 private:
 	CControls();
@@ -54,4 +61,14 @@ private:
 	static CControls* m_pControls;
 	CControls(CControls const&) = delete;//Deletes copy constructor
 	void operator = (CControls const&) = delete;//Deletes the operator assgined to the copy constructor
+
+	static GLfloat MouseSensitivity;
+	static GLfloat Yaw;
+	static GLfloat Pitch;
+	static GLfloat Roll;
+	static GLfloat LastX;
+	static GLfloat LastY;
+	static GLfloat xOffset;
+	static GLfloat yOffset;
+	static bool FirstMouse;
 };

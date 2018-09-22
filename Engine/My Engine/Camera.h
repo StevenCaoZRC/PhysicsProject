@@ -47,6 +47,7 @@ public:
 	//MVP Matrix 3D
 	void SetMVP3D();
 	//GetMVP() { return m_m4MVP; };
+	void CameraMovement();
 
 private:
 	//---------------| Matrices for MVP |---------------//

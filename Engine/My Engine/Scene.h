@@ -19,6 +19,8 @@
 #include <memory>
 // Local Includes //
 #include "Entity.h"
+#include "TextLabel.h"
+
 //class CSprite; 
 class CScene
 {
@@ -31,6 +33,8 @@ public:
 	void AddEntity(std::shared_ptr<CEntity> TobeAdded);
 	//vector of entites taht getscalled in render
 	std::vector<std::shared_ptr<CEntity>> V_EntitiesInScene;
+	std::map<std::string, std::shared_ptr<TextLabel>> m_mTextList;
+
 };
 
 

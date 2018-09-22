@@ -12,6 +12,8 @@
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 #include "Camera.h"
+#include "Controls.h"
+
 
 CCamera* CCamera::m_pCamera;
 
@@ -38,6 +40,7 @@ void CCamera::SetView2D()
 
 glm::mat4 CCamera::SetMVP2D(Utility::Transform transform)
 {
+	CameraMovement();
 	SetView2D(); //Calls the set view func
 	SetProj2D(Utility::SCR_WIDTH, Utility::SCR_HEIGHT); //Calls the set proj func
 	//Sets the translation matrix to the passed in position
@@ -56,6 +59,27 @@ glm::mat4 CCamera::SetMVP2D(Utility::Transform transform)
 	//Calculates the MVP matrix
 	m_m4MVP = m_m4Proj * m_m4View * m_m4Model;
 	return m_m4MVP;
+}
+
+void CCamera::CameraMovement()
+{
+	float cameraSpeed = 0.05f;
+	if (CControls::GetInstance()->cSpecKeyState[0] == Utility::INPUT_HOLD)
+	{
+		m_v3CamPos.y += cameraSpeed; //+= cameraSpeed * cameraUp;
+	}
+	else if (CControls::GetInstance()->cSpecKeyState[1] == Utility::INPUT_HOLD)
+	{
+		m_v3CamPos.y -= +cameraSpeed; //-= cameraSpeed * cameraUp;
+	}
+	else if (CControls::GetInstance()->cSpecKeyState[2] == Utility::INPUT_HOLD)
+	{
+		m_v3CamPos.x -= cameraSpeed; //-= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	}
+	else if (CControls::GetInstance()->cSpecKeyState[3] == Utility::INPUT_HOLD)
+	{
+		m_v3CamPos.x += cameraSpeed; //glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	}
 }
 
 CCamera * CCamera::GetInstance()

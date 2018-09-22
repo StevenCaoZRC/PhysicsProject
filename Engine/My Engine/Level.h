@@ -31,7 +31,6 @@
 class CEnemy;
 class CPlayer;
 class CEntity;
-class TextLabel;
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -41,6 +40,8 @@ public:
 	void addPlayer();
 	void addEnemy();
 	void addLevelObj();
+	void addText();
+
 	void render();
 	void update();
 	void resetLevel();
