@@ -30,7 +30,8 @@ using namespace std;
 CLevel::CLevel()
 	:world(b2Vec2(0.0f, -10.0f))
 {
-	//world.SetGravity(b2Vec2(0.0f, -gravity));
+	world.SetContactListener(&ContactListener);
+
 }
 
 // Destructor //
@@ -43,7 +44,9 @@ void CLevel::addPlayer()
 {
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
+	bird1->SetPos({ 0.0f, 0.0f, 0.0f });
 	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	
 	m_vBirdsInScene.push_back(bird1);
 
 	auto bird2 = std::make_shared<CBird>();
@@ -88,7 +91,7 @@ void CLevel::addLevelObj()
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addEnemy(Utility::PIG, { { 0.0f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 }
 
 void CLevel::addText()
@@ -113,8 +116,8 @@ void CLevel::addBlocks(Utility::Tags _tag, Utility::Transform transform, int _He
 
 void CLevel::addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight)
 {
-	std::shared_ptr<CBlocks> Enemy = make_shared<CBlocks>();
-	Enemy->initBlock(_tag, transform, _Health, iWidth, iHeight);
+	std::shared_ptr<CEnemy> Enemy = make_shared<CEnemy>();
+	Enemy->initEnemy(_tag, transform, _Health, iWidth, iHeight);
 	Enemy->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
 	AddEntity(Enemy);
 }
@@ -136,7 +139,7 @@ void CLevel::update()
 
 	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(CControls::m_fMouseX));
 	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(CControls::m_fMouseY));
-
+	
 }
 
 void CLevel::resetLevel()
@@ -170,3 +173,57 @@ void CLevel::resetLevel()
 //	}
 //}
 
+CContactListener::CContactListener()
+{
+}
+
+CContactListener::~CContactListener()
+{
+}
+
+void CContactListener::BeginContact(b2Contact* contact)
+{
+	CEntity* Entity1 = static_cast<CEntity*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	CEntity* Entity2 = static_cast<CEntity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+	
+	if (Entity1)
+	{
+		CBird* Bird = dynamic_cast<CBird*>(Entity1);
+		CEnemy* Pig = dynamic_cast<CEnemy*>(Entity1);
+		CBlocks* Block = dynamic_cast<CBlocks*>(Entity1);
+		if (Bird)
+		{
+			cout << "BirdCollided" << endl;
+		}
+		else if (Pig)
+		{
+			Pig->iHealth -= 1;
+			cout << "PigCollided" << endl;
+		}
+		else if (Block)
+		{
+			Block->iHealth -= 1;
+			cout << "BlockCollided" << endl;
+		}
+	}
+	if (Entity2)
+	{
+		CBird* Bird = dynamic_cast<CBird*>(Entity1);
+		CEnemy* Pig = dynamic_cast<CEnemy*>(Entity1);
+		CBlocks* Block = dynamic_cast<CBlocks*>(Entity1);
+		if (Bird)
+		{
+			cout << "BirdCollided" << endl;
+		}
+		else if (Pig)
+		{
+			Pig->iHealth -= 1;
+			cout << "PigCollided" << endl;
+		}
+		else if (Block)
+		{
+			Block->iHealth -= 1;
+			cout << "BlockCollided" << endl;
+		}
+	}
+}

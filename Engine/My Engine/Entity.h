@@ -28,7 +28,7 @@ public:
 	virtual void Update2D();
 	int GetHeight() { return m_iHeight; };
 	int GetWidth() { return m_iWidth; };
-	Utility::Tags iTags;
+
 
 	glm::vec3 objPosition = { 0.0,0.0,0.0 };
 	glm::vec3 objRotate = { 0.0,0.0,0.0 };
@@ -57,7 +57,7 @@ protected:
 private:
 	int m_iWidth;
 	int m_iHeight;
-
+	Utility::Tags iTags;
 
 	GLuint m_vao; // Vertex Array Obj
 	GLuint m_vbo;

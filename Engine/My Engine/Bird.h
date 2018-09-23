@@ -6,8 +6,8 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	Player.h
-// Description	:	header file outlining the Player
+// File Name	:	CBird.h
+// Description	:	header file outlining the CBird
 // Author		:	Steven Cao & Vivian Ngo
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //

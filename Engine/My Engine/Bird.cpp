@@ -6,8 +6,8 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	Player.cpp
-// Description	:	main implementation for Player
+// File Name	:	Bird.cpp
+// Description	:	main implementation for Bird
 // Author		:	Steven Cao & Vivian Ngo
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
@@ -35,7 +35,7 @@ CBird::~CBird()
 void CBird::InitBird(Utility::Tags _type)
 {
 	CreateEntity2D(SelectSprite(_type), 80, 80);
-	init2D({ { -6.75f,0.0f,0.0f } ,{ 0.0f,0.0f,0.0f } ,{ 1.0f,1.0f,1.0f } }, _type);
+	init2D({ { -7.75f,0.0f,0.0f } ,{ 0.0f,0.0f,0.0f } ,{ 1.0f,1.0f,1.0f } }, _type);
 }
 
 void CBird::Update2D()
@@ -46,4 +46,5 @@ void CBird::Update2D()
 		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
+	
 }

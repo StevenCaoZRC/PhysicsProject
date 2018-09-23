@@ -37,6 +37,13 @@
 //class CBird;
 //class CFastBird;
 //class CEntity;
+class CContactListener : public b2ContactListener
+{
+public:
+	CContactListener();
+	~CContactListener();
+	void BeginContact(b2Contact* contact);
+};
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -55,7 +62,7 @@ public:
 	void resetLevel();
 
 	b2World world;
-	
+
 	//void delEnemy(std::shared_ptr<CEnemy>);
 	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
 private:
@@ -64,7 +71,10 @@ private:
 	std::shared_ptr<CEntity>CircleofSling;
 	int nScore = 0;
 	float gravity = 9.81f;
+	CContactListener ContactListener;
 };
+
+
 
 #endif // _CLEVEL_H__
 

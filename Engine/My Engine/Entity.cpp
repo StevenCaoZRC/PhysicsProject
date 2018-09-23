@@ -12,6 +12,7 @@
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 #include "Entity.h"
+#include "SceneManager.h"
 
 CEntity::CEntity()
 {
@@ -149,7 +150,10 @@ void CEntity::Render2D(GLuint _programID)
 
 void CEntity::Update2D()
 {
-	
+	if (this->iHealth == 0)
+	{
+		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
+	}
 	
 }
 
@@ -163,6 +167,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	bodyDef.position.Set(objPosition.x, objPosition.y);
 	//Box2D version of a pointer, which points from a physics object to a game entity
 	bodyDef.userData = &*this;
+	//bodyb2d->SetUserData(this);
 	//Create body
 	bodyb2d = b2dWorld.CreateBody(&bodyDef);
 	//Set the transform of the physics object according to the transform of the game entity

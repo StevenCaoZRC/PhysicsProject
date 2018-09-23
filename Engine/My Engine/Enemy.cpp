@@ -44,6 +44,9 @@ void CEnemy::Update2D()
 		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
-
+	if (this->iHealth == 0)
+	{
+		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
+	}
 	//Case tag -> do action
 }
