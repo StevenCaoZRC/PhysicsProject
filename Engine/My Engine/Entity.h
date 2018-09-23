@@ -39,7 +39,7 @@ public:
 	
 	//Box2D Stuff
 	b2Body* bodyb2d = nullptr;
-	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true, float fFriction = 0.3f, float fDensity = 1.0f);
+	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true , float fDensity = 1.0f, float fFriction = 0.3f);
 protected:
 		float m_fMass;
 		float fGravity;

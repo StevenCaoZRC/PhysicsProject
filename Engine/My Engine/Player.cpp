@@ -32,21 +32,21 @@ CPlayer::~CPlayer()
 
 }
 
-void CPlayer::init2D(float _fMass, Utility::Transform transform, Utility::Tags IDTags)
-{
-	//Sets the stats of the player such has its starting position
-	objPosition = transform.position;
-	objScale = transform.scale;
-	objRotate = transform.rotation;
-	m_fMass = _fMass;
-	//fGravity = 0.5f;
-
-	//---------------|Sound Stuff|---------------//
-	//CSound::GetInstance()->init();
-	//CSound::GetInstance()->addSound();
-	//CSound::GetInstance()->soundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel); \
-	//	CSound::GetInstance()->soundEffects->setVolume(0.1f);
-}
+//void CPlayer::init2D(Utility::Transform transform, Utility::Tags IDTags)
+//{
+//	//Sets the stats of the player such has its starting position
+//	objPosition = transform.position;
+//	objScale = transform.scale;
+//	objRotate = transform.rotation;
+//
+//	//fGravity = 0.5f;
+//
+//	//---------------|Sound Stuff|---------------//
+//	//CSound::GetInstance()->init();
+//	//CSound::GetInstance()->addSound();
+//	//CSound::GetInstance()->soundMgr->playSound(CSound::GetInstance()->bgMusic, 0, false, &CSound::GetInstance()->BgMusicChannel); \
+//	//	CSound::GetInstance()->soundEffects->setVolume(0.1f);
+//}
 
 void CPlayer::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 {

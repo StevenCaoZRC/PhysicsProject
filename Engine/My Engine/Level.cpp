@@ -41,13 +41,11 @@ CLevel::~CLevel()
 
 void CLevel::addPlayer()
 {
-	float StartWidth = CircleofSling->GetWidth() / 2.0f;
-	float StartHeight = CircleofSling->GetHeight() / 2.0f; 
 	//Creating Player
 	Player = make_shared<CPlayer>();
-	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 0, 0);
-	Player->init2D(2.0f, { {-10,0,0.0f} ,{0.0f,0.0f,0.0f} ,{ 0.01f,0.01f,1.0f } }, Utility::BIRD);
-	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.3f, 0.5f);
+	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 80, 80);
+	Player->init2D({ {-7.75f,0,0.0f} ,{0.0f,0.0f,0.0f} ,{ 1.0f,1.0f,1.0f } }, Utility::BIRD);
+	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	//CharacterSpr->addFrame("Resources/player_character/character_jump_0.png");
 	AddEntity(Player);
 }
@@ -66,21 +64,21 @@ void CLevel::addLevelObj()
 {
 	std::shared_ptr<CEntity>Background = make_shared<CEntity>();
 	Background->CreateEntity2D("Resources/Backgrounds/blue_grass.png",Utility::SCR_WIDTH, Utility::SCR_HEIGHT);
-	Background->init2D({ { 0.0f,-2.0f,0.0f },{0,0,0},{ 0.025f,0.035f,0.025f } }, Utility::BACKGROUND);
+	Background->init2D({ { 0.0f,-1.25f,0.0f },{0,0,0},{ 1.0f,1.5f,1.0f } }, Utility::BACKGROUND);
 
 	std::shared_ptr<CEntity>Floor = make_shared<CEntity>();
-	Floor->CreateEntity2D("Resources/other/floor.png", 0, 0);
-	Floor->init2D({ { 0 ,-10.0f,0.0f },{ 0,0,0 },{ 0.02f,0.02f,0.02f } }, Utility::INDESOBJECTS);
-	Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true, 0.3f, 0.0f);
+	Floor->CreateEntity2D("Resources/other/floor.png", 3200, 80);
+	Floor->init2D({ { 0.0f ,-5.125f,0.0f},{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	Floor->CreateB2Body(world, b2_staticBody, Utility::POLYGON, true, true);
 
 	CircleofSling = make_shared<CEntity>();
-	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 0, 0);
-	CircleofSling->init2D({ { -8 ,-5.5f,0.0f },{ 0,0,0 },{ 0.0135f,0.0135f,0.0135f } }, Utility::INDESOBJECTS);
-	CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
+	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 100, 100);
+	CircleofSling->init2D({ { -7.75f ,-2.8f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	CircleofSling->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, 1,false, true);
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
-	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 0, 0);
-	StickofSling->init2D({ { -8 ,-7.5f,0.0f },{ 0,0,0 },{ 0.005f,0.01f,0.01f } }, Utility::INDESOBJECTS);
+	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 140);
+	StickofSling->init2D({ { -7.75f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);

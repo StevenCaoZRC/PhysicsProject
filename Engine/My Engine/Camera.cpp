@@ -25,9 +25,8 @@ void CCamera::SetProj3D(int iSCR_Width, int iSCR_Height)
 
 void CCamera::SetProj2D(int iSCR_Width, int iSCR_Height)
 {
-	//Converts pixels to units(1unit is 80 pixels)
-	float fHalfScrWidth = (float)iSCR_Width / 80.0f;
-	float fHalfScrHeight = (float)iSCR_Height / 80.0f;
+	float fHalfScrWidth = (float)iSCR_Width / 2.0f;
+	float fHalfScrHeight = (float)iSCR_Height / 2.0f;
 	//Sets the projection matrix to be orthographic 
 	m_m4Proj = glm::ortho(-fHalfScrWidth, fHalfScrWidth, -fHalfScrHeight, fHalfScrHeight, 0.1f, 1000.0f);
 }

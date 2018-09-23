@@ -21,10 +21,10 @@
 
 // Types //
 using namespace std;
-CControls* CControls::m_pControls; //Redefining the static variable for class
+//Redefining the static variable for class
+CControls* CControls::m_pControls;
 unsigned char CControls::cSpecKeyState[255];
 unsigned char CControls::cMouse[3];
-
 GLfloat CControls::MouseSensitivity = 0.05f;
 GLfloat CControls::Yaw = 0.0f;
 GLfloat CControls::Pitch = 0.0f;
@@ -175,7 +175,7 @@ void CControls::MouseHoldMovement(int x, int y)
 
 		LastX = (GLfloat)x;
 		LastY = (GLfloat)y;
-
+		 
 		xOffset *= MouseSensitivity + 0.05f;
 		yOffset *= MouseSensitivity + 0.05f;
 

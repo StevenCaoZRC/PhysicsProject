@@ -53,9 +53,9 @@ public:
 
 namespace Utility
 {
-	const unsigned int SCR_WIDTH = 1000;
-	const unsigned int SCR_HEIGHT = 800;
-
+	const unsigned int SCR_WIDTH = 1600;
+	const unsigned int SCR_HEIGHT = 900;
+	const unsigned int PIXELUNIT = 80;
 	//Used for the fixtures
 	enum Shapes
 	{

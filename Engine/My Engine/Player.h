@@ -38,7 +38,7 @@ class CPlayer : public CEntity
 public:
 	CPlayer();
 	~CPlayer();
-	void init2D(float _fMass, Utility::Transform transform, Utility::Tags IDTags);
+	//void init2D(Utility::Transform transform, Utility::Tags IDTags);
 	void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
 	void Update2D();
 	bool bIsPlayerAlive = true;

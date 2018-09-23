@@ -136,8 +136,8 @@ void CEntity::Render2D(GLuint _programID)
 	glUniform1i(glGetUniformLocation(_programID, "tex"), 0);
 
 	glBindVertexArray(m_vao);			  // Bind VAO
-	  //------3D MVP------//
-	glm::mat4 MVP = CCamera::GetInstance()->SetMVP2D({ objPosition, objRotate, objScale });				//CCamera::GetInstance()->GetMVP();
+	 //------3D MVP------//
+	glm::mat4 MVP = CCamera::GetInstance()->SetMVP2D({ (objPosition * (float)Utility::PIXELUNIT), objRotate, objScale });				//CCamera::GetInstance()->GetMVP();
 	GLint MVPLoc = glGetUniformLocation(_programID, "MVP");
 	glUniformMatrix4fv(MVPLoc, 1, GL_FALSE, glm::value_ptr(MVP));
 
@@ -152,7 +152,7 @@ void CEntity::Update2D()
 	
 }
 
-void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fFriction, float fDensity)
+void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fDensity, float fFriction)
 {
 	//Creating a body definition
 	b2BodyDef bodyDef;
@@ -176,7 +176,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	{
 		b2PolygonShape b2DynamicShape;
 		
-		b2DynamicShape.SetAsBox((m_iWidth /2.0f),(m_iHeight /2.0f/80.0f));
+		b2DynamicShape.SetAsBox((GetWidth() / Utility::PIXELUNIT), (GetHeight() /2.0f/ Utility::PIXELUNIT));
 		if (bHasFixture)
 		{
 			//Define fixture
@@ -199,7 +199,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	{
 		b2CircleShape b2Circle;
 		b2Circle.m_p.Set(0.0f,0.0f);
-		b2Circle.m_radius = (GetWidth() / 2.0f/80.0f);
+		b2Circle.m_radius = (GetWidth() / 2.0f / Utility::PIXELUNIT);
 		if (bHasFixture)
 		{
 			//Define fixture
