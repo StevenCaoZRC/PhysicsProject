@@ -34,7 +34,8 @@ void CEntity::init2D(Utility::Transform transform, Utility::Tags IDTags)
 
 void CEntity::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 {
-
+	m_iHeight = iHeight;
+	m_iWidth = iWidth;
 	int HalfWidth = iWidth / 2;
 	int HalfHeight = iHeight / 2;
 	//if the passed in height and width is zero then it will get the images height and width
@@ -112,7 +113,7 @@ void CEntity::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 	//Texture class to load images.
 	//textures.push_back(m_tex);
 
-	textureloader.TexImage2D(CEntity::m_iWidth, CEntity::m_iHeight, textureloader.imageloader(_filePath, CEntity::m_iWidth, CEntity::m_iHeight));
+	textureloader.TexImage2D(iWidth, iHeight, textureloader.imageloader(_filePath, iWidth, iHeight));
 
 	//Text Coord attribute pointer
 	glVertexAttribPointer(
@@ -176,7 +177,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	{
 		b2PolygonShape b2DynamicShape;
 		
-		b2DynamicShape.SetAsBox((GetWidth() / Utility::PIXELUNIT), (GetHeight() /2.0f/ Utility::PIXELUNIT));
+		b2DynamicShape.SetAsBox((GetWidth() /2.0f / Utility::PIXELUNIT), (GetHeight() /2.0f / Utility::PIXELUNIT));
 		if (bHasFixture)
 		{
 			//Define fixture
@@ -199,7 +200,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	{
 		b2CircleShape b2Circle;
 		b2Circle.m_p.Set(0.0f,0.0f);
-		b2Circle.m_radius = (GetWidth() / 2.0f / Utility::PIXELUNIT);
+		b2Circle.m_radius = (GetWidth()/ 2.0f / Utility::PIXELUNIT);// / Utility::PIXELUNIT);
 		if (bHasFixture)
 		{
 			//Define fixture
