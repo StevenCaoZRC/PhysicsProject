@@ -37,13 +37,6 @@
 //class CBird;
 //class CFastBird;
 //class CEntity;
-class CContactListener : public b2ContactListener
-{
-public:
-	CContactListener();
-	~CContactListener();
-	void BeginContact(b2Contact* contact);
-};
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -63,6 +56,17 @@ public:
 
 	b2World world;
 
+	void ProcessMouse();
+	void MouseDown(const b2Vec2& p);
+	void MouseUp(const b2Vec2& p);
+	void MouseMove(const b2Vec2& p);
+	void Spring(const b2Vec2& p);
+	void Box(const b2Vec2& p);
+
+
+	b2MouseJoint* m_mouseJoint = NULL;
+	b2Body* m_groundBody = NULL;
+	
 	//void delEnemy(std::shared_ptr<CEnemy>);
 	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
 private:
@@ -71,10 +75,12 @@ private:
 	std::shared_ptr<CEntity>CircleofSling;
 	int nScore = 0;
 	float gravity = 9.81f;
-	CContactListener ContactListener;
+
+	bool m_mousePressed;
+	b2Vec2 m_mouseWorld;
+	b2AABB m_worldAABB;
+
 };
-
-
 
 #endif // _CLEVEL_H__
 
