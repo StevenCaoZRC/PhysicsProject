@@ -44,7 +44,10 @@ public:
 	glm::vec3 GetScale() { return objScale; }
 	
 	Utility::Tags GetEntityType() { iTags; }
+	const char* SelectSprite(Utility::Tags _tag);
 
+	//heath for stuff
+	int iHealth;
 	//Box2D Stuff
 	b2Body* bodyb2d = nullptr;
 	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true , float fDensity = 1.0f, float fFriction = 0.3f);

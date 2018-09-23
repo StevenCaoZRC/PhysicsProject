@@ -121,6 +121,12 @@
     <ClCompile Include="Bird.cpp">
       <Filter>Game\Birds</Filter>
     </ClCompile>
+    <ClCompile Include="Blocks.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\FragmentShader.txt">
@@ -220,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="Bird.h">
       <Filter>Game\Birds</Filter>
+    </ClInclude>
+    <ClInclude Include="Blocks.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

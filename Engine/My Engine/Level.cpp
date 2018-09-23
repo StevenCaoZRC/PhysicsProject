@@ -51,28 +51,11 @@ void CLevel::addPlayer()
 	bird2->SetPos({ 0.0f, 0.0f, 0.0f });
 	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird2);
-	////Creating Player
-	//Player = make_shared<CPlayer>();
-	//Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 80, 80);
-	//Player->init2D({ {-6.75f,0.0f,0.0f} ,{0.0f,0.0f,0.0f} ,{ 1.0f,1.0f,1.0f } }, Utility::BIRD);
-	//Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
-
-
-	/*Player = make_shared<CBird>();
-	Player->InitBird();
-	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
-
-	AddEntity(Player);*/
 }
 
 void CLevel::addEnemy()
 {
-	////Creating Enemy1
-	//std::shared_ptr<CEnemy>SlimeSpr = make_shared<CEnemy>("Resources/enemies/slime0.png", 0.0f, 0.0f);
-	//SlimeSpr->init(2.0f, 2.0f);
-	//SlimeSpr->objPosition = { 0.0f,-224.0f,0.0f };
-	//SpritesAdd(SlimeSpr);
-	//v_Enemies.push_back(SlimeSpr);
+
 }
 
 void CLevel::addLevelObj()
@@ -89,16 +72,22 @@ void CLevel::addLevelObj()
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 100, 100);
 	CircleofSling->init2D({ { -7.75f ,-2.8f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
-	CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, 1,false, true);
+	//CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, 1,false, true);
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
-	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 140);
+	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 125);
 	StickofSling->init2D({ { -7.75f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);
 	AddEntity(CircleofSling);
+
+	//--------------------Adding Blocks to the Level--------------------//
+	//std::shared_ptr<CBlocks> Block;
+	addBlocks(Utility::WOODBOX, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 }
 
 void CLevel::addText()
@@ -113,6 +102,14 @@ void CLevel::addText()
 	m_mTextList["MouseY"] = std::move(yText);
 }
 
+void CLevel::addBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight)
+{
+	std::shared_ptr<CBlocks> Block = make_shared<CBlocks>();
+	Block->initBlocks(_tag, transform, _Health, iWidth, iHeight);
+	Block->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
+	AddEntity(Block);
+}
+
 void CLevel::render()
 {
 	CScene::render();
@@ -121,6 +118,7 @@ void CLevel::render()
 
 void CLevel::update()
 {
+	
 	CScene::update();
 	float32 timeStep = 1.0f / 120.0f;
 	int32 velocityIteration = 6;

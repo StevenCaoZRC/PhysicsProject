@@ -6,39 +6,37 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	Player.cpp
-// Description	:	main implementation for Player
+// File Name	:	Blocks.cpp
+// Description	:	main implementation for Blocks
 // Author		:	Steven Cao & Vivian Ngo
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
 //
 
-// Local Includes //
-#include "Interface.h"
-#include "Sound.h"
 // This Includes //
-#include "Bird.h"
+#include "Blocks.h"
 
 using namespace std;
 
 // Constructor //
-CBird::CBird()
+CBlocks::CBlocks()
 {
 
 }
 
 // Destructor //
-CBird::~CBird()
+CBlocks::~CBlocks()
 {
-	
+
 }
 
-void CBird::InitBird(Utility::Tags _type)
+void CBlocks::initBlocks(Utility::Tags _tag, Utility::Transform transform, int _iHealth, int iWidth, int iHeight)
 {
-	CreateEntity2D(SelectSprite(_type), 80, 80);
-	init2D({ { -6.75f,0.0f,0.0f } ,{ 0.0f,0.0f,0.0f } ,{ 1.0f,1.0f,1.0f } }, _type);
+	iHealth = _iHealth;
+	CreateEntity2D(SelectSprite(_tag), iWidth, iHeight);
+	init2D(transform, _tag);
 }
 
-void CBird::Update2D()
+void CBlocks::Update2D()
 {
 	if (bodyb2d)
 	{
@@ -46,4 +44,6 @@ void CBird::Update2D()
 		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
+
+	//Case tag -> do action
 }

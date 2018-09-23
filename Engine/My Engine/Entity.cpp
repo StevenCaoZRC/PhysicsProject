@@ -223,7 +223,25 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	{break; }
 
 	}
-	
-	
+}
+
+const char* CEntity::SelectSprite(Utility::Tags _tag)
+{
+	if (_tag == Utility::BIRD)
+	{
+		return SPR_BIRD;
+	}
+	else if (_tag == Utility::FASTBIRD)
+	{
+		return SPR_FASTBIRD;
+	}
+	else if (_tag == Utility::TRIPLEBIRD)
+	{
+		return SPR_TRIBIRD;
+	}
+	else if (_tag == Utility::WOODBOX)
+	{
+		return SPR_WOODBOX;
+	}
 }
 

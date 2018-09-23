@@ -6,7 +6,7 @@
 //
 // (c) 2005 - 2018 Media Design School
 //
-// File Name	:	Player.h
+// File Name	:	Blocks.h
 // Description	:	header file outlining the Player
 // Author		:	Steven Cao & Vivian Ngo
 // Mail 		:	steven.zha7447@mediadesign.school.nz, vivian.ngo7572@mediadesign.school.nz
@@ -14,33 +14,28 @@
 
 #pragma once
 
-#ifndef _CPLAYER_H__
-#define _CPLAYER_H__
+#ifndef _CBLOCK_H__
+#define _CBLOCK_H__
 
 // Library Includes //
 
 // Local Includes //
 #include "Entity.h"
-//#include "CGameMech.h"
-// Types //
+#include "Scene.h"
+#include "Level.h"
+#include "Utility.h"
 
-// Constants //
-
-// Prototypes //
-
-class CBird : public CEntity
+class CBlocks : public CEntity
 {
 
 public:
-	CBird();
-	~CBird();
-	
-	void InitBird(Utility::Tags _type);
+	CBlocks();
+	~CBlocks();
+	void initBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight);
+	//void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
 	void Update2D();
 
-
-	bool bIsPlayerAlive = true;
 };
 
-#endif // _CPLAYER_H__
+#endif // _CBLOCK_H__
 

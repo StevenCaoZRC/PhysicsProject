@@ -50,6 +50,8 @@
 
 #define SPR_PIG "Resources/Aliens/alienBeige_round.png"
 
+#define SPR_WOODBOX "Resources/Wood elements/elementWood010.png"
+
 #define SPR_FLOOR "Resources/Other/floor.png"
 #define SPR_BACKGROUND "Resources/Backgrounds/blue_grass.png"
 #pragma endregion Sprite Locations
@@ -105,6 +107,7 @@ namespace Utility
 		FASTBIRD,
 		TRIPLEBIRD,
 		PIG,
+		WOODBOX,
 		DESOBJECTS,
 		INDESOBJECTS,
 		BACKGROUND,
