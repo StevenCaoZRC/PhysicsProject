@@ -74,6 +74,18 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{a6b2659e-54a6-4079-8ee4-1dc69ea58b85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Level">
+      <UniqueIdentifier>{43134634-11e0-4394-84a2-1117d55d86d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{37696f2f-8053-4b13-97e0-81e53cc698e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enemy">
+      <UniqueIdentifier>{2a2da229-061e-4c05-9608-905a5f0f9b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Blocks">
+      <UniqueIdentifier>{486edc71-30fb-4272-a818-b6884875d303}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneManager.cpp">
@@ -106,17 +118,23 @@
     <ClCompile Include="TextLabel.cpp">
       <Filter>Engine\TextLabel</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>Engine\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Game\Level</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Blocks.cpp">
+      <Filter>Game\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,17 +224,23 @@
     <ClInclude Include="TextLabel.h">
       <Filter>Engine\TextLabel</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Engine\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Game\Level</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Blocks.h">
+      <Filter>Game\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@
 #include "Scene.h"
 #include"TextLabel.h"
 #include "Player.h"
+#include "Blocks.h"
 // Types //
 
 // Constants //
@@ -41,7 +42,7 @@ public:
 	void addEnemy();
 	void addLevelObj();
 	void addText();
-
+	void addBlocks(const char * filePath,Utility::Transform transform, int _Health = 2 , int iWidth = 80, int iHeight = 80);
 	void render();
 	void update();
 	void resetLevel();
@@ -49,7 +50,7 @@ public:
 	b2World world;
 	
 	//void delEnemy(std::shared_ptr<CEnemy>);
-	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
+	std::vector<std::shared_ptr<CEnemy>> v_Enemies;
 private:
 	std::shared_ptr<CPlayer>Player;
 	std::shared_ptr<CEntity>EndSpr;

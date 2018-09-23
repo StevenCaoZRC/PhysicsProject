@@ -36,7 +36,8 @@ public:
 	glm::vec3 objRotate = { 0.0,0.0,0.0 };
 	glm::vec3 objScale = { 1.0f,1.0f,1.0f };
 
-	
+	//heath for stuff
+	int iHealth;
 	//Box2D Stuff
 	b2Body* bodyb2d = nullptr;
 	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true , float fDensity = 1.0f, float fFriction = 0.3f);
