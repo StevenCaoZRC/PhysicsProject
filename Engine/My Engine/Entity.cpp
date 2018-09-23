@@ -243,5 +243,9 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_WOODBOX;
 	}
+	else if (_tag == Utility::PIG)
+	{
+		return SPR_PIG;
+	}
 }
 

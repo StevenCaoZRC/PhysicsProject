@@ -88,6 +88,7 @@ void CLevel::addLevelObj()
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 }
 
 void CLevel::addText()
@@ -105,9 +106,17 @@ void CLevel::addText()
 void CLevel::addBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight)
 {
 	std::shared_ptr<CBlocks> Block = make_shared<CBlocks>();
-	Block->initBlocks(_tag, transform, _Health, iWidth, iHeight);
+	Block->initBlock(_tag, transform, _Health, iWidth, iHeight);
 	Block->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
 	AddEntity(Block);
+}
+
+void CLevel::addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight)
+{
+	std::shared_ptr<CBlocks> Enemy = make_shared<CBlocks>();
+	Enemy->initBlock(_tag, transform, _Health, iWidth, iHeight);
+	Enemy->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
+	AddEntity(Enemy);
 }
 
 void CLevel::render()

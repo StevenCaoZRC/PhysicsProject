@@ -48,6 +48,8 @@ public:
 	void addLevelObj();
 	void addText();
 	void addBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health = 2 , int iWidth = 80, int iHeight = 80);
+	void addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health = 2, int iWidth = 80, int iHeight = 80);
+
 	void render();
 	void update();
 	void resetLevel();

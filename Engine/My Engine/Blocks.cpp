@@ -29,7 +29,7 @@ CBlocks::~CBlocks()
 
 }
 
-void CBlocks::initBlocks(Utility::Tags _tag, Utility::Transform transform, int _iHealth, int iWidth, int iHeight)
+void CBlocks::initBlock(Utility::Tags _tag, Utility::Transform transform, int _iHealth, int iWidth, int iHeight)
 {
 	iHealth = _iHealth;
 	CreateEntity2D(SelectSprite(_tag), iWidth, iHeight);

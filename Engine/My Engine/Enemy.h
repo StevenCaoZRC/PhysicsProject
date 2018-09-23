@@ -31,9 +31,8 @@ class CEnemy : public CEntity
 public:
 	CEnemy();
 	~CEnemy();
-	void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
+	void initEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight);
 	void Update2D();
-
 
 };
 

@@ -31,8 +31,7 @@ class CBlocks : public CEntity
 public:
 	CBlocks();
 	~CBlocks();
-	void initBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight);
-	//void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
+	void initBlock(Utility::Tags _tag, Utility::Transform transform, int _Health, int iWidth, int iHeight);
 	void Update2D();
 
 };

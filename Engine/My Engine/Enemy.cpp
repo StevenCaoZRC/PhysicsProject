@@ -29,15 +29,21 @@ CEnemy::~CEnemy()
 
 }
 
-void CEnemy::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
+void CEnemy::initEnemy(Utility::Tags _tag, Utility::Transform transform, int _iHealth, int iWidth, int iHeight)
 {
-	CEntity::CreateEntity2D(_filePath, iWidth, iHeight);
+	iHealth = _iHealth;
+	CreateEntity2D(SelectSprite(_tag), iWidth, iHeight);
+	init2D(transform, _tag);
 }
 
 void CEnemy::Update2D()
 {
+	if (bodyb2d)
+	{
+		b2Vec2 BodyPosition = bodyb2d->GetPosition();
+		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
+		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
+	}
 
-
-
+	//Case tag -> do action
 }
-
