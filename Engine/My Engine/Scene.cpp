@@ -14,6 +14,8 @@
 // Local Includes //
 #include "Utility.h" 
 #include "Camera.h"
+#include "Controls.h"
+
 // This Includes //
 #include "Scene.h"
 
@@ -91,4 +93,3 @@ void CScene::AddEntity(std::shared_ptr<CEntity> TobeAdded)
 {
 	V_EntitiesInScene.push_back(TobeAdded);
 }
-

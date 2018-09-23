@@ -31,6 +31,9 @@ CLevel::CLevel()
 	:world(b2Vec2(0.0f, -10.0f))
 {
 	//world.SetGravity(b2Vec2(0.0f, -gravity));
+
+	b2BodyDef bodyDef;
+	m_groundBody = world.CreateBody(&bodyDef);
 }
 
 // Destructor //
@@ -134,9 +137,12 @@ void CLevel::update()
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
 
-	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(CControls::m_fMouseX));
-	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(CControls::m_fMouseY));
+	b2Vec2 ps((float32)CControls::m_fMouseX, (float32)CControls::m_fMouseY);
+	b2Vec2 pw = CCamera::GetInstance()->ConvertScreenToWorld(ps);
 
+	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(pw.x));
+	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(pw.y));
+	ProcessMouse();
 }
 
 void CLevel::resetLevel()
@@ -169,4 +175,118 @@ void CLevel::resetLevel()
 //
 //	}
 //}
+
+class QueryCallback : public b2QueryCallback
+{
+public:
+	QueryCallback(const b2Vec2& point)
+	{
+		m_point = point;
+		m_fixture = NULL;
+	}
+
+	bool ReportFixture(b2Fixture* fixture) override
+	{
+		b2Body* body = fixture->GetBody();
+		if (body->GetType() == b2_dynamicBody)
+		{
+			bool inside = fixture->TestPoint(m_point);
+			if (inside)
+			{
+				m_fixture = fixture;
+
+				// We are done, terminate the query.
+				return false;
+			}
+		}
+
+		// Continue the query.
+		return true;
+	}
+
+	b2Vec2 m_point;
+	b2Fixture* m_fixture;
+};
+
+void CLevel::ProcessMouse()
+{
+
+	b2Vec2 ps((float32)CControls::m_fMouseX, (float32)CControls::m_fMouseY);
+	b2Vec2 pw = CCamera::GetInstance()->ConvertScreenToWorld(ps);
+
+	MouseMove(pw);
+
+	// Use the mouse to move things around.
+	if (CControls::cMouse[0] == Utility::INPUT_HOLD)
+	{
+		MouseDown(pw);
+		m_mousePressed = true;
+		std::cout << "x: " << pw.x << "y: " << pw.y << std::endl;
+	}
+	else
+	{
+		if (m_mousePressed)
+		{
+			MouseUp(pw);
+			std::cout << "released" << std::endl;
+			m_mousePressed = false;
+		}
+	}
+}
+
+void CLevel::MouseDown(const b2Vec2& p)
+{
+	m_mouseWorld = p;
+
+	if (m_mouseJoint != NULL)
+	{
+		return;
+	}
+
+	// Make a small box.
+	b2AABB aabb;
+	b2Vec2 d;
+	d.Set(0.001f, 0.001f);
+	aabb.lowerBound = p - d;
+	aabb.upperBound = p + d;
+
+	// Query the world for overlapping shapes.
+	QueryCallback callback(p);
+	world.QueryAABB(&callback, aabb);
+
+	if (callback.m_fixture)
+	{
+		b2Body* body = callback.m_fixture->GetBody();
+		b2MouseJointDef md;
+		md.bodyA = m_groundBody;
+		md.bodyB = body;
+		md.target = p;
+		md.maxForce = 1000.0f * body->GetMass();
+		m_mouseJoint = (b2MouseJoint*)world.CreateJoint(&md);
+		body->SetAwake(true);
+	}
+}
+
+void CLevel::MouseUp(const b2Vec2& p)
+{
+	if (m_mouseJoint!= NULL)
+	{
+		world.DestroyJoint(m_mouseJoint);
+		std::cout << "JointDestroyed" << std::endl;
+
+		m_mouseJoint = NULL;
+	}
+}
+
+void CLevel::MouseMove(const b2Vec2 & p)
+{
+	m_mouseWorld = p;
+	m_groundBody->SetTransform(p, 0.0f);
+
+	if (m_mouseJoint && m_mousePressed)
+	{
+		m_mouseJoint->SetTarget(p);
+	}
+}
+
 
