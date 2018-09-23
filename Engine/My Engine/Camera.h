@@ -49,6 +49,9 @@ public:
 	//GetMVP() { return m_m4MVP; };
 	void CameraMovement();
 
+	b2Vec2 ConvertScreenToWorld(const b2Vec2& ps);
+	b2Vec2 ConvertWorldToScreen(const b2Vec2& pw);
+
 private:
 	//---------------| Matrices for MVP |---------------//
 	glm::mat4 m_m4MVP;
@@ -66,6 +69,11 @@ private:
 	glm::vec3 m_v3CamForward = glm::vec3(0.0f, 0.0f, -1.0f);
 	//Camera Elevation
 	glm::vec3 m_v3CamUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+	float fHalfScrWidth;
+	float fHalfScrHeight;
+	float m_zoom = 1.0f;
+	b2Vec2 m_center;
 
 //Singleton
 public:

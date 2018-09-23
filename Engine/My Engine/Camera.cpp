@@ -25,8 +25,9 @@ void CCamera::SetProj3D(int iSCR_Width, int iSCR_Height)
 
 void CCamera::SetProj2D(int iSCR_Width, int iSCR_Height)
 {
-	float fHalfScrWidth = (float)iSCR_Width / 2.0f;
-	float fHalfScrHeight = (float)iSCR_Height / 2.0f;
+	fHalfScrWidth = (float)iSCR_Width / 2.0f;
+	fHalfScrHeight = (float)iSCR_Height / 2.0f;
+	m_center = { fHalfScrWidth /2, fHalfScrHeight /2};
 	//Sets the projection matrix to be orthographic 
 	m_m4Proj = glm::ortho(-fHalfScrWidth, fHalfScrWidth, -fHalfScrHeight, fHalfScrHeight, 0.1f, 1000.0f);
 }
@@ -108,4 +109,45 @@ CCamera::CCamera()
 //Destructor
 CCamera::~CCamera()
 {
+}
+
+b2Vec2 CCamera::ConvertScreenToWorld(const b2Vec2& ps)
+{
+	float32 w = float32(fHalfScrWidth);
+	float32 h = float32(fHalfScrHeight);
+	float32 u = ps.x / w;
+	float32 v = (h - ps.y) / h;
+
+	float32 ratio = w / h;
+	b2Vec2 extents(ratio * 25.0f, 25.0f);
+	extents *= m_zoom;
+
+	b2Vec2 lower = m_center - extents;
+	b2Vec2 upper = m_center + extents;
+
+	b2Vec2 pw;
+	pw.x = (1.0f - u) * lower.x + u * upper.x;
+	pw.y = (1.0f - v) * lower.y + v * upper.y;
+	return pw;
+}
+
+//
+b2Vec2 CCamera::ConvertWorldToScreen(const b2Vec2& pw)
+{
+	float32 w = float32(fHalfScrWidth);
+	float32 h = float32(fHalfScrHeight);
+	float32 ratio = w / h;
+	b2Vec2 extents(ratio * 25.0f, 25.0f);
+	extents *= m_zoom;
+
+	b2Vec2 lower = m_center - extents;
+	b2Vec2 upper = m_center + extents;
+
+	float32 u = (pw.x - lower.x) / (upper.x - lower.x);
+	float32 v = (pw.y - lower.y) / (upper.y - lower.y);
+
+	b2Vec2 ps;
+	ps.x = u * w;
+	ps.y = (1.0f - v) * h;
+	return ps;
 }

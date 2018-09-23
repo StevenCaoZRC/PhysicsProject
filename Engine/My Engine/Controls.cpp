@@ -166,7 +166,6 @@ void CControls::MouseHoldMovement(int x, int y)
 			LastY = (GLfloat)y;
 			FirstMouse = false;
 		}
-		std::cout << "bleH" << std::endl;
 		m_fMouseX = (float)x;
 		m_fMouseY = (float)y;
 

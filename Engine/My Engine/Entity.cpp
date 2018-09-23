@@ -247,5 +247,6 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_PIG;
 	}
+	return SPR_WOODBOX; //default
 }
 
