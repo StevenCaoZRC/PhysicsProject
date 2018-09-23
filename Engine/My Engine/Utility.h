@@ -40,7 +40,7 @@
 #include <thread>
 #include <memory>
 #include <cmath>
-#include <vld.h>		// Memory Leak Detector
+//#include <vld.h>		// Memory Leak Detector
 
 
 #pragma region Sprite Locations

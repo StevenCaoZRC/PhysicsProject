@@ -18,6 +18,7 @@
 
 // This Includes //
 #include "Controls.h"
+#include "Camera.h"
 
 // Types //
 using namespace std;
@@ -122,6 +123,7 @@ void CControls::Mouse(int nButton, int nGlutState, int nX, int nY)
 	{
 		//Checking and tracking the mousees current button state
 		cMouse[nButton] = (nGlutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
+
 	}
 }
 
@@ -135,7 +137,6 @@ void CControls::MousePassiveMovement(int x, int y)
 		LastY = (GLfloat)y;
 		FirstMouse = false;
 	}
-
 	LastX = (GLfloat)x;
 	LastY = (GLfloat)y;
 
@@ -166,7 +167,6 @@ void CControls::MouseHoldMovement(int x, int y)
 			LastY = (GLfloat)y;
 			FirstMouse = false;
 		}
-		std::cout << "bleH" << std::endl;
 		m_fMouseX = (float)x;
 		m_fMouseY = (float)y;
 

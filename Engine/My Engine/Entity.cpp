@@ -232,6 +232,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 
 const char* CEntity::SelectSprite(Utility::Tags _tag)
 {
+
 	if (_tag == Utility::BIRD)
 	{
 		return SPR_BIRD;
@@ -252,5 +253,6 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_PIG;
 	}
+	return SPR_WOODBOX; //default
 }
 
