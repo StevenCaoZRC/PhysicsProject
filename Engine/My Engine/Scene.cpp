@@ -46,11 +46,21 @@ void CScene::render()
 	{
 		it.second->Render();
 	}
+
+	for (auto it : m_vBirdsInScene)
+	{
+		it->Render2D(CUtility::program);
+	}
 }
 
 void CScene::update()
 {
 	for (auto it : V_EntitiesInScene)
+	{
+		it->Update2D();
+	}
+
+	for (auto it : m_vBirdsInScene)
 	{
 		it->Update2D();
 	}
@@ -65,7 +75,15 @@ void CScene::DeleteEntity(std::shared_ptr<CEntity> TobeDeleted)
 			V_EntitiesInScene.erase(it);
 			break;
 		}
+	}
 
+	for (auto it = m_vBirdsInScene.begin(); it != m_vBirdsInScene.end(); it++)
+	{
+		if ((*it) == TobeDeleted)
+		{
+			m_vBirdsInScene.erase(it);
+			break;
+		}
 	}
 }
 

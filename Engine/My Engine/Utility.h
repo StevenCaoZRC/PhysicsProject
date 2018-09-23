@@ -42,6 +42,18 @@
 #include <cmath>
 #include <vld.h>		// Memory Leak Detector
 
+
+#pragma region Sprite Locations
+#define SPR_BIRD "Resources/Aliens/alienPink_round.png"
+#define SPR_FASTBIRD "Resources/Aliens/alienYellow_round.png"
+#define SPR_TRIBIRD "Resources/Aliens/alienBlue_round.png"
+
+#define SPR_PIG "Resources/Aliens/alienBeige_round.png"
+
+#define SPR_FLOOR "Resources/Other/floor.png"
+#define SPR_BACKGROUND "Resources/Backgrounds/blue_grass.png"
+#pragma endregion Sprite Locations
+
 class CUtility
 {
 public:
@@ -85,15 +97,17 @@ namespace Utility
 		glm::vec3 rotation;
 		glm::vec3 scale;
 	};
+
 	//Used to identify objects
 	enum Tags
 	{
 		BIRD = 0,
+		FASTBIRD,
+		TRIPLEBIRD,
 		PIG,
 		DESOBJECTS,
 		INDESOBJECTS,
 		BACKGROUND,
 	};
-
 }
 

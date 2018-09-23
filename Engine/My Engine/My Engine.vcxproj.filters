@@ -74,6 +74,9 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{a6b2659e-54a6-4079-8ee4-1dc69ea58b85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Birds">
+      <UniqueIdentifier>{c74bb30b-3e01-4ace-890a-e2847157eade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneManager.cpp">
@@ -115,8 +118,8 @@
     <ClCompile Include="Time.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="Bird.cpp">
+      <Filter>Game\Birds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,8 +218,8 @@
     <ClInclude Include="Time.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="Bird.h">
+      <Filter>Game\Birds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

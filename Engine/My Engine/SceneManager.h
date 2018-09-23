@@ -22,7 +22,6 @@
 #include <memory>
 // Local Includes //
 #include "Camera.h"
-#include "Entity.h"
 #include "Utility.h"
 #include "Scene.h"
 #include "Controls.h"

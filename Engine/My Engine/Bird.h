@@ -21,10 +21,6 @@
 
 // Local Includes //
 #include "Entity.h"
-#include "Controls.h"
-#include "Scene.h"
-#include "Level.h"
-#include "SceneManager.h"
 //#include "CGameMech.h"
 // Types //
 
@@ -32,19 +28,19 @@
 
 // Prototypes //
 
-class CPlayer : public CEntity
+class CBird : public CEntity
 {
 
 public:
-	CPlayer();
-	~CPlayer();
-	//void init2D(Utility::Transform transform, Utility::Tags IDTags);
-	void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
+	CBird();
+	~CBird();
+	
+	void InitBird(Utility::Tags _type);
 	void Update2D();
-	bool bIsPlayerAlive = true;
-private:
 
-	glm::vec2 v2_Movement = glm::vec2();
+	const char* SelectSprite(Utility::Tags _tag);
+
+	bool bIsPlayerAlive = true;
 };
 
 #endif // _CPLAYER_H__

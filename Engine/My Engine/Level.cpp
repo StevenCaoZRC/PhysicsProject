@@ -41,13 +41,28 @@ CLevel::~CLevel()
 
 void CLevel::addPlayer()
 {
-	//Creating Player
-	Player = make_shared<CPlayer>();
-	Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 80, 80);
-	Player->init2D({ {-6.75f,0.0f,0.0f} ,{0.0f,0.0f,0.0f} ,{ 1.0f,1.0f,1.0f } }, Utility::BIRD);
+	auto bird1 = std::make_shared<CBird>();
+	bird1->InitBird(Utility::BIRD);
+	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	m_vBirdsInScene.push_back(bird1);
+
+	auto bird2 = std::make_shared<CBird>();
+	bird2->InitBird(Utility::FASTBIRD);
+	bird2->SetPos({ 0.0f, 0.0f, 0.0f });
+	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	m_vBirdsInScene.push_back(bird2);
+	////Creating Player
+	//Player = make_shared<CPlayer>();
+	//Player->CreateEntity2D("Resources/Aliens/alienPink_round.png", 80, 80);
+	//Player->init2D({ {-6.75f,0.0f,0.0f} ,{0.0f,0.0f,0.0f} ,{ 1.0f,1.0f,1.0f } }, Utility::BIRD);
+	//Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+
+
+	/*Player = make_shared<CBird>();
+	Player->InitBird();
 	Player->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
-	//CharacterSpr->addFrame("Resources/player_character/character_jump_0.png");
-	AddEntity(Player);
+
+	AddEntity(Player);*/
 }
 
 void CLevel::addEnemy()
@@ -107,7 +122,7 @@ void CLevel::render()
 void CLevel::update()
 {
 	CScene::update();
-	float32 timeStep = 1.0f / 60.0f;
+	float32 timeStep = 1.0f / 120.0f;
 	int32 velocityIteration = 6;
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);

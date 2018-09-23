@@ -17,32 +17,40 @@
 #include "Utility.h"
 #include "Camera.h"
 
-
-
 class CEntity : public std::enable_shared_from_this<CEntity>//this allows me to return shared ptr form itself(using keyword THIS)
 {
 public:
 	CEntity();
 	~CEntity();
 	virtual void init2D(Utility::Transform transform, Utility::Tags IDTags);
-	virtual void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
+	void CreateEntity2D(const char * _filePath, int iWidth, int iHeight);
 	virtual void Render2D(GLuint _programID);
 	virtual void Update2D();
 	int GetHeight() { return m_iHeight; };
 	int GetWidth() { return m_iWidth; };
-	int iTags;
+	Utility::Tags iTags;
 
 	glm::vec3 objPosition = { 0.0,0.0,0.0 };
 	glm::vec3 objRotate = { 0.0,0.0,0.0 };
 	glm::vec3 objScale = { 1.0f,1.0f,1.0f };
 
+	//Setters and Getters
+	void SetPos(glm::vec3 Movement) { objPosition = Movement; }
+	void SetRotatation(glm::vec3 Rotation) { objRotate = Rotation; }
+	void SetScale(glm::vec3 scale) { objScale = scale; }
+
+	glm::vec3 GetPos() { return objPosition; }
+	glm::vec3 GetRot() { return objRotate; }
+	glm::vec3 GetScale() { return objScale; }
 	
+	Utility::Tags GetEntityType() { iTags; }
+
 	//Box2D Stuff
 	b2Body* bodyb2d = nullptr;
 	void CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable = true, bool bHasFixture = true , float fDensity = 1.0f, float fFriction = 0.3f);
 protected:
-		float m_fMass;
-		float fGravity;
+	float m_fMass;
+	float fGravity;
 private:
 	int m_iWidth;
 	int m_iHeight;

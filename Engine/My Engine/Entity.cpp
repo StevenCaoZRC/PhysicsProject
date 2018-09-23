@@ -173,7 +173,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 
 	switch (Shape)
 	{
-	case 0:
+	case Utility::POLYGON:
 	{
 		b2PolygonShape b2DynamicShape;
 		
@@ -196,7 +196,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 		}
 		break;
 	}
-	case 1:
+	case Utility::CIRCLE:
 	{
 		b2CircleShape b2Circle;
 		b2Circle.m_p.Set(0.0f,0.0f);

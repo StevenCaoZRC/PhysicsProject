@@ -21,16 +21,19 @@
 #include "Utility.h"
 // Local Includes //
 #include "Scene.h"
-#include"TextLabel.h"
-#include "Player.h"
+#include "Bird.h"
+
+//#include"TextLabel.h"
 // Types //
 
 // Constants //
 
 // Prototypes //
-class CEnemy;
-class CPlayer;
-class CEntity;
+//class CScene;
+//class CEnemy;
+//class CBird;
+//class CFastBird;
+//class CEntity;
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -51,7 +54,7 @@ public:
 	//void delEnemy(std::shared_ptr<CEnemy>);
 	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
 private:
-	std::shared_ptr<CPlayer>Player;
+	//std::shared_ptr<CBird>Player;
 	std::shared_ptr<CEntity>EndSpr;
 	std::shared_ptr<CEntity>CircleofSling;
 	int nScore = 0;
