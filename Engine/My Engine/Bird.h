@@ -40,6 +40,7 @@ public:
 
 
 	bool bIsPlayerAlive = true;
+
 };
 
 #endif // _CPLAYER_H__

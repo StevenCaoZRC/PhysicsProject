@@ -37,6 +37,9 @@
 //class CBird;
 //class CFastBird;
 //class CEntity;
+
+
+
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -54,7 +57,6 @@ public:
 	void update();
 	void resetLevel();
 
-	b2World world;
 
 	void ProcessMouse();
 	void MouseDown(const b2Vec2& p);

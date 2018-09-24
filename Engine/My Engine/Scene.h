@@ -21,6 +21,14 @@
 #include "Entity.h"
 #include "TextLabel.h"
 
+class CContactListener : public b2ContactListener
+{
+public:
+	CContactListener();
+	~CContactListener();
+	void BeginContact(b2Contact* contact);
+};
+
 //class CSprite; 
 class CScene
 {
@@ -37,6 +45,8 @@ public:
 	std::vector<std::shared_ptr<CEntity>> V_EntitiesInScene;
 	std::map<std::string, std::shared_ptr<TextLabel>> m_mTextList;
 
+	b2World world;
+	CContactListener Listener;
 };
 
 

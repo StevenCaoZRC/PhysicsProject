@@ -25,9 +25,7 @@ CBlocks::CBlocks()
 
 // Destructor //
 CBlocks::~CBlocks()
-{
-
-}
+{}
 
 void CBlocks::initBlock(Utility::Tags _tag, Utility::Transform transform, int _iHealth, int iWidth, int iHeight)
 {
@@ -38,6 +36,7 @@ void CBlocks::initBlock(Utility::Tags _tag, Utility::Transform transform, int _i
 
 void CBlocks::Update2D()
 {
+	
 	if (bodyb2d)
 	{
 		b2Vec2 BodyPosition = bodyb2d->GetPosition();
@@ -46,7 +45,10 @@ void CBlocks::Update2D()
 	}
 	if (this->iHealth == 0)
 	{
+		CSceneManager::GetInstance()->GetCurrentScene()->world.DestroyBody(bodyb2d);
+		bodyb2d = nullptr;
 		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
+		
 	}
 	//Case tag -> do action
 }

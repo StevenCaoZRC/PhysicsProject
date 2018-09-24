@@ -77,9 +77,6 @@
     <Filter Include="Game\Birds">
       <UniqueIdentifier>{c74bb30b-3e01-4ace-890a-e2847157eade}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ContactListener">
-      <UniqueIdentifier>{3a84664c-aa73-4b8c-a2d1-914eb32c7084}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneManager.cpp">
@@ -130,7 +127,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="ContactListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\FragmentShader.txt">
@@ -236,9 +232,6 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ContactListener.h">
-      <Filter>Engine\ContactListener</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

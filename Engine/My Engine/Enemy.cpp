@@ -46,6 +46,9 @@ void CEnemy::Update2D()
 	}
 	if (this->iHealth == 0)
 	{
+		CSceneManager::GetInstance()->GetCurrentScene()->world.DestroyBody(bodyb2d);
+		bodyb2d = nullptr;
+		
 		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
 	}
 	//Case tag -> do action

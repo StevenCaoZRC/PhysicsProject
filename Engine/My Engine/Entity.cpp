@@ -150,9 +150,11 @@ void CEntity::Render2D(GLuint _programID)
 
 void CEntity::Update2D()
 {
-	if (this->iHealth == 0)
+	if (this->iHealth <= 0)
 	{
-		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
+	/*	this->getbody()->getworld()->destroybody(this->getbody());
+		cscenemanager::getinstance()->getcurrentscene()->deleteentity(this->shared_from_this());*/
+		std::cout << "stuff died" << std::endl;
 	}
 	
 }

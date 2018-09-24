@@ -24,8 +24,9 @@ using namespace std;
 
 // Constructor //
 CScene::CScene()
+	:world(b2Vec2(0.0f, -10.0f))
 {
-
+	world.SetContactListener(&Listener);
 
 }
 
@@ -57,15 +58,29 @@ void CScene::render()
 
 void CScene::update()
 {
-	for (auto it : V_EntitiesInScene)
+	size_t currentVecSize = V_EntitiesInScene.size();
+	for (size_t index = 0; index < currentVecSize; ++index)
 	{
-		it->Update2D();
+		V_EntitiesInScene[index]->Update2D();
+		currentVecSize = V_EntitiesInScene.size();
 	}
 
-	for (auto it : m_vBirdsInScene)
+	currentVecSize = m_vBirdsInScene.size();
+	for (size_t index = 0; index < currentVecSize; ++index)
+	{
+		m_vBirdsInScene[index]->Update2D();
+		currentVecSize = m_vBirdsInScene.size();
+	}
+
+	/*for (auto it : V_EntitiesInScene)
 	{
 		it->Update2D();
-	}
+	}*/
+
+	/*for (auto it : m_vBirdsInScene)
+	{
+		it->Update2D();
+	}*/
 }
 
 void CScene::DeleteEntity(std::shared_ptr<CEntity> TobeDeleted)
