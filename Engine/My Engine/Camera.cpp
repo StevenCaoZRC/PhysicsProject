@@ -128,11 +128,13 @@ b2Vec2 CCamera::ConvertScreenToWorld(const b2Vec2& ps)
 
 	b2Vec2 pw;
 
-	/*float a = Utility::SCR_WIDTH / 80;
-	float b = Utility::SCR_HEIGHT / 80;*/
+	// Normalise device coordinates ray 
+	pw.x = (((2.0f * ps.x) / (float)Utility::SCR_WIDTH - 1.0f)/8)*80;
+	pw.y = ((1.0f - (2.0f * ps.y) / (float)Utility::SCR_HEIGHT)/14)*80;
 
-	pw.x = ((1.0f - u) * lower.x + u * upper.x);
-	pw.y = ((1.0f - v) * lower.y + v * upper.y);
+
+	/*pw.x = ((1.0f - u) * lower.x + u * upper.x);
+	pw.y = ((1.0f - v) * lower.y + v * upper.y);*/
 	return pw;
 }
 
