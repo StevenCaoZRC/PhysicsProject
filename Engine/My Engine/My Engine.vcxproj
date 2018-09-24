@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="Blocks.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
