@@ -45,7 +45,7 @@ void CLevel::addPlayer()
 {
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
-	bird1->SetPos({ 0.0f, 0.0f, 0.0f });
+	bird1->SetPos({ -7.75f, 0.0f, 0.0f });
 	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird1);
 
@@ -118,7 +118,7 @@ void CLevel::addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Hea
 {
 	std::shared_ptr<CEnemy> Enemy = make_shared<CEnemy>();
 	Enemy->initEnemy(_tag, transform, _Health, iWidth, iHeight);
-	Enemy->SetPos({ 0.0f, 0.0f, 0.0f });
+	Enemy->SetPos({ 7.75f, 0.0f, 0.0f });
 	Enemy->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
 	AddEntity(Enemy);
 }
@@ -131,9 +131,8 @@ void CLevel::render()
 
 void CLevel::update()
 {
-	
 	CScene::update();
-	float32 timeStep = 1.0f / 120.0f;
+	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIteration = 6;
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
@@ -310,18 +309,18 @@ void CContactListener::BeginContact(b2Contact * contact)
 		CBlocks* Block = dynamic_cast<CBlocks*>(Entity1);
 		if (Entity1 != Entity2 )
 		{
-			if (Bird)
+			if (Bird && (Entity2->GetEntityType() != Utility::BIRD || Entity2->GetEntityType() != Utility::FASTBIRD))
 			{
 				cout << "BirdCollided" << endl;
 			}
-			else if (Pig)
+			else if (Pig && Entity2->GetEntityType() != Utility::PIG)
 			{
-				Pig->iHealth -= 1;
+				Pig->iHealth-=1;
 				cout << "PigCollided" << endl;
 			}
-			else if (Block)
+			else if (Block &&( Entity2->GetEntityType() != Utility::WOODBOX && Entity2->GetEntityType() != Utility::PIG) || Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::TRIPLEBIRD)
 			{
-				Block->iHealth -= 1;
+				Block->iHealth--;
 				cout << "BlockCollided" << endl;
 			}
 		}
@@ -334,18 +333,18 @@ void CContactListener::BeginContact(b2Contact * contact)
 		CBlocks* Block = dynamic_cast<CBlocks*>(Entity1);
 		if (Entity1 != Entity2 )//|| Entity1 != Entity1)
 		{
-			if (Bird)
+			if (Bird && (Entity1->GetEntityType() != Utility::BIRD || Entity1->GetEntityType() != Utility::FASTBIRD))
 			{
 				cout << "BirdCollided" << endl;
 			}
-			else if (Pig)
+			else if (Pig && Entity1->GetEntityType() != Utility::PIG)
 			{
-				Pig->iHealth -= 1;
+				Pig->iHealth--;
 				cout << "PigCollided" << endl;
 			}
-			else if (Block)
+			else if (Block && (Entity1->GetEntityType() != Utility::WOODBOX && Entity1->GetEntityType() != Utility::PIG)|| Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::TRIPLEBIRD)
 			{
-				Block->iHealth -= 1;
+				Block->iHealth--;
 				cout << "BlockCollided" << endl;
 			}
 		}

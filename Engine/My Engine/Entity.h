@@ -43,7 +43,7 @@ public:
 	glm::vec3 GetRot() { return objRotate; }
 	glm::vec3 GetScale() { return objScale; }
 	
-	Utility::Tags GetEntityType() { iTags; }
+	Utility::Tags GetEntityType() { return iTags; }
 	const char* SelectSprite(Utility::Tags _tag);
 
 	//heath for stuff
