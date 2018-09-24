@@ -29,8 +29,6 @@ using namespace std;
 // Constructor //
 CLevel::CLevel()
 {
-	//world.SetGravity(b2Vec2(0.0f, -gravity));
-	
 	b2BodyDef bodyDef;
 	m_groundBody = world.CreateBody(&bodyDef);
 }
@@ -45,7 +43,7 @@ void CLevel::addPlayer()
 {
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
-	bird1->SetPos({ -7.75f, 0.0f, 0.0f });
+	bird1->SetPos({ -7.0f, 0.0f, 0.0f });
 	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird1);
 
@@ -74,12 +72,12 @@ void CLevel::addLevelObj()
 
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 100, 100);
-	CircleofSling->init2D({ { -7.75f ,-2.8f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	CircleofSling->init2D({ { -7.0f ,-2.8f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	//CircleofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, 1,false, true);
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 125);
-	StickofSling->init2D({ { -7.75f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	StickofSling->init2D({ { -7.0f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
@@ -137,11 +135,8 @@ void CLevel::update()
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
 
-	b2Vec2 ps((float32)CControls::m_fMouseX, (float32)CControls::m_fMouseY);
-	b2Vec2 pw = CCamera::GetInstance()->ConvertScreenToWorld(ps);
-
-	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(pw.x));
-	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(pw.y));
+	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(m_mouseWorld.x));
+	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(m_mouseWorld.y));
 	ProcessMouse();
 }
 
@@ -221,14 +216,12 @@ void CLevel::ProcessMouse()
 	{
 		MouseDown(pw);
 		m_mousePressed = true;
-		std::cout << "x: " << pw.x << "y: " << pw.y << std::endl;
 	}
 	else
 	{
 		if (m_mousePressed)
 		{
 			MouseUp(pw);
-			std::cout << "released" << std::endl;
 			m_mousePressed = false;
 		}
 	}
@@ -273,7 +266,6 @@ void CLevel::MouseUp(const b2Vec2& p)
 	{
 		world.DestroyJoint(m_mouseJoint);
 		std::cout << "JointDestroyed" << std::endl;
-
 		m_mouseJoint = NULL;
 	}
 }

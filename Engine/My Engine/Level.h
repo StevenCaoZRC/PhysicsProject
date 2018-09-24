@@ -38,8 +38,6 @@
 //class CFastBird;
 //class CEntity;
 
-
-
 class CLevel : public CScene
 {
 	// Member Functions //
@@ -62,12 +60,7 @@ public:
 	void MouseDown(const b2Vec2& p);
 	void MouseUp(const b2Vec2& p);
 	void MouseMove(const b2Vec2& p);
-	void Spring(const b2Vec2& p);
-	void Box(const b2Vec2& p);
 
-
-	b2MouseJoint* m_mouseJoint = NULL;
-	b2Body* m_groundBody = NULL;
 	
 	//void delEnemy(std::shared_ptr<CEnemy>);
 	//std::vector<std::shared_ptr<CEnemy>> v_Enemies;
@@ -80,8 +73,8 @@ private:
 
 	bool m_mousePressed;
 	b2Vec2 m_mouseWorld;
-	b2AABB m_worldAABB;
-
+	b2MouseJoint* m_mouseJoint = NULL;
+	b2Body* m_groundBody = NULL;
 };
 
 #endif // _CLEVEL_H__

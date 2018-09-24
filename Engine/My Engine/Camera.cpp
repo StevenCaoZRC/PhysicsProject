@@ -111,30 +111,12 @@ CCamera::~CCamera()
 {
 }
 
-// TODO: FIX SCREEN TO WORLD
+
 b2Vec2 CCamera::ConvertScreenToWorld(const b2Vec2& ps)
 {
-	float32 w = float32(fHalfScrWidth);
-	float32 h = float32(fHalfScrHeight);
-	float32 u = ps.x / w;
-	float32 v = (h - ps.y) / h;
-
-	float32 ratio = w / h;
-	b2Vec2 extents(ratio * 25.0f, 25.0f);
-	extents *= m_zoom;
-
-	b2Vec2 lower = m_center - extents;
-	b2Vec2 upper = m_center + extents;
-
 	b2Vec2 pw;
-
-	// Normalise device coordinates ray 
 	pw.x = (((2.0f * ps.x) / (float)Utility::SCR_WIDTH - 1.0f)/8)*80;
 	pw.y = ((1.0f - (2.0f * ps.y) / (float)Utility::SCR_HEIGHT)/14)*80;
-
-
-	/*pw.x = ((1.0f - u) * lower.x + u * upper.x);
-	pw.y = ((1.0f - v) * lower.y + v * upper.y);*/
 	return pw;
 }
 
