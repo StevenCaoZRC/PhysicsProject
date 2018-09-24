@@ -46,5 +46,29 @@ void CBird::Update2D()
 		objPosition = glm::vec3(BodyPosition.x, BodyPosition.y, 0.0f);
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
-	
+
+	if (m_bActivateAttack)
+	{
+		Attack();
+	}
+}
+
+void CBird::Attack()
+{
+	switch (GetEntityType())
+	{
+		case Utility::Tags::FASTBIRD:
+		{
+			
+			break;
+		}
+		case Utility::Tags::TRIPLEBIRD:
+		{
+			break;
+		}
+		default:
+		{
+			//Normal bird does nothing
+		}
+	}
 }

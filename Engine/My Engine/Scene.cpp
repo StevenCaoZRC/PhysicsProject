@@ -108,3 +108,16 @@ void CScene::AddEntity(std::shared_ptr<CEntity> TobeAdded)
 {
 	V_EntitiesInScene.push_back(TobeAdded);
 }
+
+std::shared_ptr<CEntity> CScene::GetEntity(Utility::Tags _tag)
+{
+	for (auto it = V_EntitiesInScene.begin(); it != V_EntitiesInScene.end(); it++)
+	{
+		if ((*it)->GetEntityType() == _tag)
+		{
+			return (*it);
+			break;
+		}
+	}
+	return nullptr;
+}

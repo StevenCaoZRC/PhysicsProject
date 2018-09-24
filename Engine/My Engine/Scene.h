@@ -39,6 +39,8 @@ public:
 	virtual void update();
 	void DeleteEntity(std::shared_ptr<CEntity> TobeDeleted);
 	void AddEntity(std::shared_ptr<CEntity> TobeAdded);
+	std::shared_ptr<CEntity> GetEntity(Utility::Tags _tag);
+
 	//vector of entites taht getscalled in render
 	std::vector<std::shared_ptr<CEntity>> m_vBirdsInScene;
 

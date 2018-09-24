@@ -38,8 +38,11 @@ public:
 	void InitBird(Utility::Tags _type);
 	void Update2D();
 
+	void Attack();
 
-	bool bIsPlayerAlive = true;
+private:
+	bool m_bIsAlive = true;
+	bool m_bActivateAttack = false;
 
 };
 

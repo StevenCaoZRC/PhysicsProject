@@ -48,8 +48,10 @@ public:
 	void addEnemy();
 	void addLevelObj();
 	void addText();
-	void addBlocks(Utility::Tags _tag, Utility::Transform transform, int _Health = 1 , int iWidth = 80, int iHeight = 80);
+	void addBlocks(Utility::Tags _tag, b2BodyType _type, Utility::Transform transform, int _Health = 1 , int iWidth = 80, int iHeight = 80);
 	void addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health = 1, int iWidth = 80, int iHeight = 80);
+	void addDistanceJoint(b2Body& _body1, b2Body& _body2);
+	void addRevoluteJoint(b2Body& _body1, b2Body& _body2);
 
 	void render();
 	void update();
@@ -71,10 +73,21 @@ private:
 	int nScore = 0;
 	float gravity = 9.81f;
 
-	bool m_mousePressed;
+	bool m_bJointConnected = false;
+	bool m_mousePressed = false;
 	b2Vec2 m_mouseWorld;
-	b2MouseJoint* m_mouseJoint = NULL;
+	b2MouseJoint* m_pMouseJoint = NULL;
 	b2Body* m_groundBody = NULL;
+	b2Body* m_currentBodyHeld = NULL;
+	b2Body* m_circleSling = NULL;
+	b2Body* m_pCurrentBird = NULL;
+	b2RevoluteJoint* m_revoluteBod = NULL;
+
+	b2DistanceJoint* m_pDistJoint;
+
+	float m_fOldTime = 0.0f;
+	//float m_fOldTime;
+
 };
 
 #endif // _CLEVEL_H__

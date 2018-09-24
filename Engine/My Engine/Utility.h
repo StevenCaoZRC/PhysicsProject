@@ -51,6 +51,8 @@
 #define SPR_PIG "Resources/Aliens/alienBeige_round.png"
 
 #define SPR_WOODBOX "Resources/Wood elements/elementWood010.png"
+#define SPR_STONELONG "Resources/Stone elements/elementStone013.png"
+#define SPR_STONEROUND "Resources/Stone elements/elementStone001.png"
 
 #define SPR_FLOOR "Resources/Other/floor.png"
 #define SPR_BACKGROUND "Resources/Backgrounds/blue_grass.png"
@@ -108,6 +110,8 @@ namespace Utility
 		TRIPLEBIRD,
 		PIG,
 		WOODBOX,
+		STONELONG,
+		STONEROUND,
 		DESOBJECTS,
 		INDESOBJECTS,
 		BACKGROUND,

@@ -164,6 +164,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 	bodyDef.position.Set(objPosition.x, objPosition.y);
 	//Box2D version of a pointer, which points from a physics object to a game entity
 	bodyDef.userData = &*this;
+	
 	//bodyb2d->SetUserData(this);
 	//Create body
 	bodyb2d = b2dWorld.CreateBody(&bodyDef);
@@ -189,6 +190,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 			fixtureDef.density = fDensity;
 			//Setting the friction
 			fixtureDef.friction = fFriction;
+
 			//add this fixture to the body
 			bodyb2d->CreateFixture(&fixtureDef);
 		}
@@ -246,10 +248,18 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_WOODBOX;
 	}
+	else if (_tag == Utility::STONELONG)
+	{
+		return SPR_STONELONG;
+	}
+	else if (_tag == Utility::STONEROUND)
+	{
+		return SPR_STONEROUND;
+	}
 	else if (_tag == Utility::PIG)
 	{
 		return SPR_PIG;
 	}
-	return SPR_WOODBOX; //default
+	return SPR_STONEROUND; //default
 }
 
