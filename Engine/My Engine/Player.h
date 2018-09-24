@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Bird.h"
-
+#include "Utility.h"
 class CPlayer
 {
 public:
@@ -12,7 +12,8 @@ public:
 
 	void AddBird(CBird _bird);
 	void FlingBird();
-
+	
+	
 private:
 	//int m_iLives; 
 	std::vector < std::shared_ptr<CBird>> m_vBirdList;

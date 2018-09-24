@@ -52,7 +52,7 @@ public:
 	void addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health = 1, int iWidth = 80, int iHeight = 80);
 	void addDistanceJoint(b2Body& _body1, b2Body& _body2);
 	void addRevoluteJoint(b2Body& _body1, b2Body& _body2);
-
+	void addRopeJoint(b2Body& _body1);
 	void render();
 	void update();
 	void resetLevel();

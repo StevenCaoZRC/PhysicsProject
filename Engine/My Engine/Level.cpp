@@ -73,7 +73,7 @@ void CLevel::addLevelObj()
 
 	CircleofSling = make_shared<CEntity>();
 	CircleofSling->CreateEntity2D("Resources/Stone elements/elementStone001.png", 100, 100);
-	CircleofSling->init2D({ { -7.0f ,-2.8f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	CircleofSling->init2D({ { -7.0f ,-2.9f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	//CircleofSling->CreateB2Body(world, b2_kinematicBody, Utility::POLYGON ,false, false);
 
 	//m_circleSling = CircleofSling->GetBody();
@@ -81,7 +81,7 @@ void CLevel::addLevelObj()
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 125);
 	StickofSling->init2D({ { -7.0f ,-4.1f,0.0f },{ 0,2.0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
-	StickofSling->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, false, true);
+	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);
@@ -95,6 +95,8 @@ void CLevel::addLevelObj()
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
 	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	//for rope to attach on to 
+	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	
 	//WORLD BLOCKS that prevent birds from flying out of screen
 	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
@@ -143,7 +145,9 @@ void CLevel::addDistanceJoint(b2Body & _body1, b2Body & _body2)
 	distJointDef.bodyA = &_body1;
 	distJointDef.bodyB = &_body2;
 	distJointDef.length = 0.1f;
-	distJointDef.frequencyHz = 3.0f;	distJointDef.dampingRatio = 1.0f;	distJointDef.Initialize(&_body1, &_body2, _body1.GetWorldCenter(), _body2.GetWorldCenter());
+	distJointDef.frequencyHz = 3.0f;
+	distJointDef.dampingRatio = 1.0f;
+	distJointDef.Initialize(&_body1, &_body2, _body1.GetWorldCenter(), _body2.GetWorldCenter());
 	distJointDef.collideConnected = false;
 	m_pDistJoint = (b2DistanceJoint*) world.CreateJoint(&distJointDef);
 }
@@ -154,13 +158,19 @@ void CLevel::addRevoluteJoint(b2Body & _body1, b2Body & _body2)
 
 	revoluteDef.bodyA = &_body1;
 	revoluteDef.bodyB = &_body2;
-	revoluteDef.Initialize(&_body1, &_body2, _body1.GetWorldCenter());		revoluteDef.lowerAngle = -0.5f * b2_pi; // -90 degrees 
+	revoluteDef.Initialize(&_body1, &_body2, _body1.GetWorldCenter());	
+	revoluteDef.lowerAngle = -0.5f * b2_pi; // -90 degrees 
 	revoluteDef.upperAngle = 0.25f * b2_pi; // 45 degrees 
 	revoluteDef.enableLimit = true;
 	revoluteDef.maxMotorTorque = 10.0f;
 	revoluteDef.motorSpeed = 5.0f;
 	revoluteDef.enableMotor = true;
 	m_revoluteBod = (b2RevoluteJoint*)world.CreateJoint(&revoluteDef);
+}
+
+void CLevel::addRopeJoint(b2Body & _body1)
+{
+
 }
 
 void CLevel::render()
@@ -310,9 +320,13 @@ void CLevel::MouseDown(const b2Vec2& p)
 		md.bodyA = m_groundBody;
 		md.bodyB = m_currentBodyHeld;
 		md.target = p;
-		md.maxForce = 1000.0f * m_currentBodyHeld->GetMass();
+		md.maxForce = 2.0f;// *m_currentBodyHeld->GetMass();
+		md.dampingRatio = 4.0f;
+		md.frequencyHz = 5.0f;
 		m_pMouseJoint = (b2MouseJoint*)world.CreateJoint(&md);
+		//m_currentBodyHeld->IsFixedRotation();
 		m_currentBodyHeld->SetAwake(true);
+		
 		/*if (!m_bJointConnected)
 			addDistanceJoint(*m_pCurrentBird, *m_circleSling);*/
 		m_bJointConnected = true;
@@ -324,11 +338,19 @@ void CLevel::MouseUp(const b2Vec2& p)
 {
 	if (m_pMouseJoint!= NULL)
 	{
+		float32 strength = m_pMouseJoint->GetMaxForce();
 		world.DestroyJoint(m_pMouseJoint);
 		m_mousePressed = false;
 		std::cout << "MouseJoint Destroyed" << std::endl;
 		m_pMouseJoint = NULL;
+		
+		float32 vecX = (m_pCurrentBird->GetWorldCenter().x - p.x) * strength;
+		float32 vecY = (m_pCurrentBird->GetWorldCenter().y - p.x) * strength;
 
+		float32 tempvecX = (m_pCurrentBird->GetWorldCenter().x - p.x); // *strength;
+		float32 tempvecY = (m_pCurrentBird->GetWorldCenter().y - p.x);// * strength;
+		std::cout << tempvecX <<","<< tempvecY << std::endl;
+		m_pCurrentBird->ApplyLinearImpulse({ vecX,vecY }, m_currentBodyHeld->GetWorldCenter(), true);
 		//if (m_bJointConnected)
 		//{
 		//	m_bJointConnected = false;
@@ -347,7 +369,7 @@ void CLevel::MouseMove(const b2Vec2 & p)
 
 	if (m_pMouseJoint && m_mousePressed)
 	{
-		m_pMouseJoint->SetTarget(p);
+		//m_pMouseJoint->SetTarget(p);
 	}
 }
 

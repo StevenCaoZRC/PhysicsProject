@@ -32,3 +32,4 @@ void CPlayer::FlingBird()
 {
 	m_vBirdList.erase(m_vBirdList.begin());
 }
+
