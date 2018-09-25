@@ -131,8 +131,12 @@ void CLevel::addLevel1Objects()
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 0.0f ,6.5f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 1600, 80);
 
+
+
 	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addRevoluteJoint(*GetEntity(Utility::STONELONG)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
+	addWeldJoint(*GetEntity(Utility::STONEROUND)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
+
 }
 
 void CLevel::addLevel2Objects()
@@ -232,6 +236,19 @@ void CLevel::addRevoluteJoint(b2Body & _body1, b2Body & _body2)
 void CLevel::addRopeJoint(b2Body & _body1)
 {
 
+}
+
+void CLevel::addWeldJoint(b2Body & _body1, b2Body & _body2)
+{
+	b2WeldJointDef weldDef;
+	weldDef.bodyA = &_body1;
+	weldDef.bodyB = &_body2;
+	//weldDef.Initialize(&_body1, &_body2, _body2.GetWorldCenter());
+	//weldDef.collideConnected = true;
+	weldDef.localAnchorA = weldDef.bodyA->GetLocalPoint({ 0.0, 1.0f });
+	weldDef.localAnchorB = weldDef.bodyB->GetLocalPoint({ 0.0, -1.0f });
+	weldDef.dampingRatio = 6.0f;
+	m_weld = (b2WeldJoint*)world.CreateJoint(&weldDef);
 }
 
 void CLevel::render()

@@ -57,6 +57,9 @@ public:
 	void addDistanceJoint(b2Body& _body1, b2Body& _body2);
 	void addRevoluteJoint(b2Body& _body1, b2Body& _body2);
 	void addRopeJoint(b2Body& _body1);
+	void addWeldJoint(b2Body& _body1, b2Body& _body2);
+
+
 	void render();
 	void update();
 	void resetLevel();
@@ -86,6 +89,7 @@ private:
 	std::shared_ptr<CEntity> m_circleSling = NULL;
 	std::shared_ptr<CBird> m_pCurrentBird = NULL;
 	b2RevoluteJoint* m_revoluteBod = NULL;
+	b2WeldJoint* m_weld = nullptr;
 
 	b2DistanceJoint* m_pDistJoint;
 
