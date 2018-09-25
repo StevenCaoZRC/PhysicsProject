@@ -54,6 +54,9 @@
 #define SPR_STONELONG "Resources/Stone elements/elementStone013.png"
 #define SPR_STONEROUND "Resources/Stone elements/elementStone001.png"
 
+#define SPR_GLASSTRI "Resources/Glass elements/elementGlass001.png"
+
+
 #define SPR_FLOOR "Resources/Other/floor.png"
 #define SPR_BACKGROUND "Resources/Backgrounds/blue_grass.png"
 #pragma endregion Sprite Locations
@@ -112,6 +115,7 @@ namespace Utility
 		WOODBOX,
 		STONELONG,
 		STONEROUND,
+		TRIGLASS,
 		DESOBJECTS,
 		INDESOBJECTS,
 		BACKGROUND,

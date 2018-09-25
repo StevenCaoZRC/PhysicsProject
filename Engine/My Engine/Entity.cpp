@@ -262,6 +262,10 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_PIG;
 	}
+	else if (_tag == Utility::TRIGLASS)
+	{
+		return SPR_GLASSTRI;
+	}
 	return SPR_STONEROUND; //default
 }
 

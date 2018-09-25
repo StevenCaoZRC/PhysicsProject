@@ -128,6 +128,12 @@ void CLevel::addLevel1Objects()
 	addBlocks(Utility::STONEROUND, b2_dynamicBody, { { 7.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1);
 
 
+	////tri
+	//addBlocks(Utility::STONELONG, b2_dynamicBody, { { 0.0f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 120);
+	//addBlocks(Utility::TRIGLASS, b2_dynamicBody, { { 0.0f, -2.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
+
+	
+
 	//WORLD BLOCKS that prevent birds from flying out of screen
 	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
@@ -153,7 +159,11 @@ void CLevel::addLevel2Objects()
 	//std::shared_ptr<CBlocks> Block;
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,-1.1f,0.0f },{ 0,0,0 },
+	{ 1.0f,1.0f,1.0f } });
+
+	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 0.0f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 120);
+
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
 	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::STONELONG, b2_staticBody, { { -8.6f, -3.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 10);
@@ -166,8 +176,10 @@ void CLevel::addLevel2Objects()
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 0.0f ,6.5f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 1600, 80);
 
-	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addEnemy(Utility::PIG, { { 5.5f , 2.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addEnemy(Utility::PIG, { { 3.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	
+
+	addDistanceJoint(*GetEntity(Utility::STONELONG)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
 }
 
 void CLevel::addMainMenu()
@@ -201,7 +213,7 @@ void CLevel::addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Hea
 {
 	std::shared_ptr<CEnemy> Enemy = make_shared<CEnemy>();
 	Enemy->initEnemy(_tag, transform, _Health, iWidth, iHeight);
-	Enemy->SetPos({ 7.75f, 0.0f, 0.0f });
+	Enemy->SetPos({ transform.position });
 	Enemy->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
 	++enemyCount;
 	AddEntity(Enemy);
@@ -302,9 +314,6 @@ void CLevel::update()
 			}
 		}
 	}
-
-	
-	
 }
 
 void CLevel::resetLevel()
@@ -430,8 +439,6 @@ void CLevel::MouseDown(const b2Vec2& p)
 		//m_currentBodyHeld->IsFixedRotation();
 		m_currentBodyHeld->SetAwake(true);
 		
-		/*if (!m_bJointConnected)
-			addDistanceJoint(*m_pCurrentBird, *m_circleSling);*/
 		m_bJointConnected = true;
 	}
 	
