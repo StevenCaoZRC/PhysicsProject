@@ -123,6 +123,7 @@ void CLevel::addLevel1Objects()
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
 	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONELONG, b2_staticBody, { { -8.6f, -3.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 10);
 	//for rope to attach on to 
 	addBlocks(Utility::STONEROUND, b2_dynamicBody, { { 7.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1);
 
