@@ -80,7 +80,7 @@ void CLevel::addLevelObj()
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 125);
-	StickofSling->init2D({ { -7.0f ,-4.1f,0.0f },{ 0,2.0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	StickofSling->init2D({ { -7.0f ,-4.2f,0.0f },{ 0,2.0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
@@ -90,14 +90,16 @@ void CLevel::addLevelObj()
 
 	//--------------------Adding Blocks to the Level--------------------//
 	//std::shared_ptr<CBlocks> Block;
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } },2);
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } },2);
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } },2);
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
-	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+
 	//for rope to attach on to 
-	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	
+	addBlocks(Utility::STONEROUND, b2_dynamicBody, { { 7.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } },1);
+	//addBlocks(Utility::STONELONG, b2_dynamicBody, { { -3.0f ,4.1f,0.0f },{ 0,0,0 },{ 2.0f,1.0f,1.0f } });
+
+
 	//WORLD BLOCKS that prevent birds from flying out of screen
 	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
@@ -106,7 +108,8 @@ void CLevel::addLevelObj()
 
 	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addRevoluteJoint(*GetEntity(Utility::STONELONG)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
-
+	addWeldJoint(*GetEntity(Utility::STONEROUND)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
+	//addWeldJoint(*GetEntity(Utility::STONEROUND)->GetBody(), *GetEntity(Utility::WOODBOX)->GetBody());
 }
 
 void CLevel::addText()
@@ -168,15 +171,26 @@ void CLevel::addRevoluteJoint(b2Body & _body1, b2Body & _body2)
 	m_revoluteBod = (b2RevoluteJoint*)world.CreateJoint(&revoluteDef);
 }
 
-void CLevel::addRopeJoint(b2Body & _body1)
+void CLevel::addWeldJoint(b2Body & _body1, b2Body & _body2)
 {
-
+	b2WeldJointDef weldDef;
+	weldDef.bodyA = &_body1;
+	weldDef.bodyB = &_body2;
+	//weldDef.Initialize(&_body1, &_body2, _body2.GetWorldCenter());
+	//weldDef.collideConnected = true;
+	weldDef.localAnchorA = weldDef.bodyA->GetLocalPoint({ 0.0, 1.0f });
+	weldDef.localAnchorB = weldDef.bodyB->GetLocalPoint({ 0.0, -1.0f });
+	weldDef.dampingRatio = 6.0f;
+	m_weld = (b2WeldJoint*)world.CreateJoint(&weldDef);
 }
 
 void CLevel::render()
 {
 	CScene::render();
-
+	//for (auto it : m_vBlocksForRope)
+	//{
+	//	it->Render2D(CUtility::program);
+	//}
 }
 
 void CLevel::update()
@@ -345,10 +359,10 @@ void CLevel::MouseUp(const b2Vec2& p)
 		m_pMouseJoint = NULL;
 		
 		float32 vecX = (m_pCurrentBird->GetWorldCenter().x - p.x) * strength;
-		float32 vecY = (m_pCurrentBird->GetWorldCenter().y - p.x) * strength;
+		float32 vecY = (m_pCurrentBird->GetWorldCenter().y - p.y) * strength;
 
 		float32 tempvecX = (m_pCurrentBird->GetWorldCenter().x - p.x); // *strength;
-		float32 tempvecY = (m_pCurrentBird->GetWorldCenter().y - p.x);// * strength;
+		float32 tempvecY = (m_pCurrentBird->GetWorldCenter().y - p.y);// * strength;
 		std::cout << tempvecX <<","<< tempvecY << std::endl;
 		m_pCurrentBird->ApplyLinearImpulse({ vecX,vecY }, m_currentBodyHeld->GetWorldCenter(), true);
 		//if (m_bJointConnected)

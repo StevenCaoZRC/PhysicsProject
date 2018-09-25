@@ -54,6 +54,7 @@ void CScene::render()
 	{
 		it->Render2D(CUtility::program);
 	}
+
 }
 
 void CScene::update()
