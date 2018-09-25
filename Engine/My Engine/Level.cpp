@@ -18,6 +18,7 @@
 #include "Controls.h"
 // This Includes //
 #include "Level.h"
+#include "Time.h"
 
 // Static Variables //
 
@@ -51,13 +52,13 @@ void CLevel::addPlayer()
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
 	bird1->SetPos({ -7.0f, 0.0f, 0.0f });
-	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
 	m_vBirdsInScene.push_back(bird1);
 
 	auto bird2 = std::make_shared<CBird>();
 	bird2->InitBird(Utility::FASTBIRD);
 	bird2->SetPos({ -8.0f, -4.0f, 0.0f });
-	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
 	m_vBirdsInScene.push_back(bird2);
 
 	auto bird3 = std::make_shared<CBird>();
@@ -123,7 +124,8 @@ void CLevel::addLevel1Objects()
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
 	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	//for rope to attach on to 
-	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONEROUND, b2_dynamicBody, { { 7.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1);
+
 
 	//WORLD BLOCKS that prevent birds from flying out of screen
 	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
@@ -260,7 +262,7 @@ void CLevel::render()
 void CLevel::update()
 {
 	CScene::update();
-	float32 timeStep = 1.0f / 60.0f;
+	float32 timeStep = CTime::GetInstance()->GetDeltaTime();//1.0f / 60.0f;
 	int32 velocityIteration = 6;
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
