@@ -54,6 +54,53 @@ void CSceneManager::UpdateCurrent()
 {
 	Scenes[nCurrentScene]->update();
 
+	if (nCurrentScene == 2)
+	{
+		if (Scenes[nCurrentScene]->GetGameLost())
+		{
+			switchScene(0);
+		}
+	}
+	else if (Scenes[nCurrentScene]->GetEnemyCount() == 0)
+	{
+		if (nCurrentScene == 1)
+		{
+			Scenes[2]->SetGameLost(false);
+			Scenes[2]->ChangeText("Status", "Game Won");
+
+			ResetScenes();
+			switchScene(2);
+		}
+		else
+		{
+			switchScene(1);
+		}
+	}
+	else if (Scenes[nCurrentScene]->GetGameLost())
+	{
+		Scenes[2]->SetGameLost(false);
+		Scenes[2]->ChangeText("Status", "Game Lost");
+
+		switchScene(2);
+		ResetScenes();
+	}
+}
+
+void CSceneManager::ResetScenes()
+{
+	shared_ptr<CLevel>Level = make_shared<CLevel>(0);
+	Level->addLevelObj();
+	Level->addPlayer();
+	Level->addText();
+	Level->addLevel1Objects();
+	Scenes[0] = Level;
+
+	shared_ptr<CLevel>Level2 = make_shared<CLevel>(1);
+	Level2->addLevelObj();
+	Level2->addPlayer();
+	Level2->addText();
+	Level2->addLevel2Objects();
+	Scenes[1] = Level2;
 }
 
 void CSceneManager::init()
@@ -67,18 +114,32 @@ void CSceneManager::init()
 	//Gets the initial values of the controls
 	//creaing a shared pointer to level and bgSprite and CharacterSpr
 	//Adding the spr to level
-	shared_ptr<CLevel>Level = make_shared<CLevel>();
+	shared_ptr<CLevel>Level = make_shared<CLevel>(0);
 	Level->addLevelObj();
 	Level->addPlayer();
 	Level->addText();
+	Level->addLevel1Objects();
+
+	shared_ptr<CLevel>Level2 = make_shared<CLevel>(1);
+	Level2->addLevelObj();
+	Level2->addPlayer();
+	Level2->addText();
+	Level2->addLevel2Objects();
+
+	shared_ptr<CLevel>GameOver = make_shared<CLevel>(2);
+	GameOver->addLevelObj();
+	GameOver->addMainMenu();
 
 	//Adding the level to scenemanager
 	//---------------|Menu Scenes Stuff|---------------//
 	//---------------|End Scenes Stuff|---------------//
 	//Adding the scenes to scenemanager
 	CSceneManager::GetInstance()->SceneAdd(Level);
-
+	CSceneManager::GetInstance()->SceneAdd(Level2);
+	CSceneManager::GetInstance()->SceneAdd(GameOver);
+	switchScene(2);
 }
+
 
 void CSceneManager::switchScene(int nNewScene)
 {

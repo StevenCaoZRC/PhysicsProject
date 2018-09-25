@@ -50,6 +50,9 @@ void CEnemy::Update2D()
 		bodyb2d = nullptr;
 		
 		CSceneManager::GetInstance()->GetCurrentScene()->DeleteEntity(this->shared_from_this());
+					//--enemyCount;
+		CSceneManager::GetInstance()->GetCurrentScene()->DecreaseEnemyCount();
+
 	}
 	//Case tag -> do action
 }

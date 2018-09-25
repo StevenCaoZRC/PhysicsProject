@@ -45,14 +45,14 @@ void CScene::render()
 		it->Render2D(CUtility::program);
 	}
 
-	for (auto it : m_mTextList)
-	{
-		it.second->Render();
-	}
-
 	for (auto it : m_vBirdsInScene)
 	{
 		it->Render2D(CUtility::program);
+	}
+
+	for (auto it : m_mTextList)
+	{
+		it.second->Render();
 	}
 
 }
@@ -67,21 +67,12 @@ void CScene::update()
 	}
 
 	currentVecSize = m_vBirdsInScene.size();
+
 	for (size_t index = 0; index < currentVecSize; ++index)
 	{
 		m_vBirdsInScene[index]->Update2D();
 		currentVecSize = m_vBirdsInScene.size();
 	}
-
-	/*for (auto it : V_EntitiesInScene)
-	{
-		it->Update2D();
-	}*/
-
-	/*for (auto it : m_vBirdsInScene)
-	{
-		it->Update2D();
-	}*/
 }
 
 void CScene::DeleteEntity(std::shared_ptr<CEntity> TobeDeleted)
@@ -121,4 +112,19 @@ std::shared_ptr<CEntity> CScene::GetEntity(Utility::Tags _tag)
 		}
 	}
 	return nullptr;
+}
+
+//Gets first bird in the list
+std::shared_ptr<CBird> CScene::GetCurrentBird()
+{
+	if (m_vBirdsInScene.size() != 0)
+	{
+		return m_vBirdsInScene[0];
+	}
+	return NULL;
+}
+
+void CScene::ChangeText(std::string _textName, std::string _text)
+{
+	m_mTextList.find(_textName)->second->SetText(_text);
 }

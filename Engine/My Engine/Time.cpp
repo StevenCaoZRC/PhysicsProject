@@ -46,7 +46,7 @@ void CTime::Initialize()
 
 void CTime::Update()
 {
-	newTime = (float)glutGet(GLUT_ELAPSED_TIME);
+	newTime = (float)glutGet(GLUT_ELAPSED_TIME)/1000;
 	deltaTime = newTime - oldTime;
 
 	oldTime = newTime;

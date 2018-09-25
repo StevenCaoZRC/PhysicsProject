@@ -127,9 +127,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\FragmentShader.txt">
@@ -234,9 +231,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

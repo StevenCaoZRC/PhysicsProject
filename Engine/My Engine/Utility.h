@@ -46,7 +46,7 @@
 #pragma region Sprite Locations
 #define SPR_BIRD "Resources/Aliens/alienPink_round.png"
 #define SPR_FASTBIRD "Resources/Aliens/alienYellow_round.png"
-#define SPR_TRIBIRD "Resources/Aliens/alienBlue_round.png"
+#define SPR_BIGBIRD "Resources/Aliens/alienBlue_round.png"
 
 #define SPR_PIG "Resources/Aliens/alienBeige_round.png"
 
@@ -107,7 +107,7 @@ namespace Utility
 	{
 		BIRD = 0,
 		FASTBIRD,
-		TRIPLEBIRD,
+		BIGBIRD,
 		PIG,
 		WOODBOX,
 		STONELONG,

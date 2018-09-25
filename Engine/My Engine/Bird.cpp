@@ -17,6 +17,7 @@
 #include "Sound.h"
 // This Includes //
 #include "Bird.h"
+#include "Controls.h"
 
 using namespace std;
 
@@ -47,28 +48,37 @@ void CBird::Update2D()
 		objRotate.z = (bodyb2d->GetAngle() / b2_pi) * 180;
 	}
 
-	if (m_bActivateAttack)
+	if (m_bFlung && m_bIsAlive)
 	{
 		Attack();
+		float currentTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME) / 1000.0f);
+		if (currentTime - m_fOldDeathTime > m_fTimeTilDeath)
+		{
+			m_bIsAlive = false;
+		}
 	}
 }
 
 void CBird::Attack()
 {
-	switch (GetEntityType())
+
+	if (m_bFlung)
 	{
-		case Utility::Tags::FASTBIRD:
+		if (CControls::cMouse[0] == Utility::INPUT_HOLD)
 		{
-			
-			break;
+			if (GetEntityType() == Utility::Tags::FASTBIRD)
+			{
+				b2Vec2 veloctityTemp = 1.3f * bodyb2d->GetLinearVelocity();
+				bodyb2d->SetLinearVelocity(veloctityTemp);
+			}
 		}
-		case Utility::Tags::TRIPLEBIRD:
-		{
-			break;
-		}
-		default:
-		{
-			//Normal bird does nothing
-		}
+		
 	}
+}
+
+void CBird::SetFlung(bool _flung)
+{
+	m_fOldDeathTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME) / 1000.0f);
+
+	m_bFlung = _flung;
 }

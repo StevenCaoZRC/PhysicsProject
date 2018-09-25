@@ -46,6 +46,8 @@ public:
 	static void DestroyInstance();
 	void RenderCurrent();
 	void UpdateCurrent();
+	void ResetScenes();
+
 	void init();
 	void switchScene(int nNewScene);
 	void SceneAdd(std::shared_ptr<CScene>AddSc); //Adds current scene to vector
