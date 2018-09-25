@@ -51,14 +51,20 @@ void CLevel::addPlayer()
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
 	bird1->SetPos({ -7.0f, 0.0f, 0.0f });
-	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
+	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird1);
 
 	auto bird2 = std::make_shared<CBird>();
 	bird2->InitBird(Utility::FASTBIRD);
 	bird2->SetPos({ -8.0f, -4.0f, 0.0f });
-	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
+	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird2);
+
+	auto bird3 = std::make_shared<CBird>();
+	bird3->InitBird(Utility::BIGBIRD);
+	bird3->SetPos({ -8.5f, -4.0f, 0.0f });
+	bird3->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 1.0f);
+	m_vBirdsInScene.push_back(bird3);
 }
 
 
@@ -433,6 +439,7 @@ void CLevel::MouseUp(const b2Vec2& p)
 
 				m_pCurrentBird->GetBody()->ApplyLinearImpulse({ vecX,vecY }, m_currentBodyHeld->GetWorldCenter(), true);
 				m_pCurrentBird->SetFlung(true);
+
 			}
 		}
 		

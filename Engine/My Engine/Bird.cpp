@@ -62,27 +62,14 @@ void CBird::Update2D()
 void CBird::Attack()
 {
 
-	if (m_bActivateAttack)
+	if (m_bFlung)
 	{
 		if (CControls::cMouse[0] == Utility::INPUT_HOLD)
 		{
-			switch (GetEntityType())
+			if (GetEntityType() == Utility::Tags::FASTBIRD)
 			{
-			case Utility::Tags::FASTBIRD:
-			{
-
-				//bodyb2d->ApplyLinearImpulse();
-				break;
-			}
-			case Utility::Tags::BIGBIRD:
-			{
-
-				break;
-			}
-			default:
-			{
-				//Normal bird does nothing
-			}
+				b2Vec2 veloctityTemp = 1.3f * bodyb2d->GetLinearVelocity();
+				bodyb2d->SetLinearVelocity(veloctityTemp);
 			}
 		}
 		
