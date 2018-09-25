@@ -104,13 +104,18 @@ void CLevel::addText()
 
 void CLevel::addLevel1Objects()
 {
+	auto LevelTitle = std::make_shared<TextLabel>("Level " + std::to_string(m_iLevelNum+1), "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH / 2 - 225.0f, Utility::SCR_HEIGHT / 2));
+
+	LevelTitle->SetScale(2.0f);
+
+	m_mTextList["Level"] = std::move(LevelTitle);
 	//--------------------Adding Blocks to the Level--------------------//
 	//std::shared_ptr<CBlocks> Block;
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
-	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	//for rope to attach on to 
 	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 
@@ -126,13 +131,18 @@ void CLevel::addLevel1Objects()
 
 void CLevel::addLevel2Objects()
 {
+	auto LevelTitle = std::make_shared<TextLabel>("Level " + std::to_string(m_iLevelNum+1), "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH / 2 - 225.0f, Utility::SCR_HEIGHT / 2));
+
+	LevelTitle->SetScale(2.0f);
+
+	m_mTextList["Level"] = std::move(LevelTitle);
 	//--------------------Adding Blocks to the Level--------------------//
 	//std::shared_ptr<CBlocks> Block;
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
-	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONELONG, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	//for rope to attach on to 
 	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 
@@ -144,21 +154,25 @@ void CLevel::addLevel2Objects()
 
 	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
 	addEnemy(Utility::PIG, { { 5.5f , 2.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-
 }
 
 void CLevel::addMainMenu()
 {
 	auto GameTitle = std::make_shared<TextLabel>("GRUMPY BIRDS", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH/2 - 225.0f, Utility::SCR_HEIGHT/2));
 	auto Start = std::make_shared<TextLabel>("Click anywhere to start", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH/2 - 200.0f, Utility::SCR_HEIGHT/2 - 100));
+	auto GameStatus = std::make_shared<TextLabel>("", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH / 2 - 150.0f, Utility::SCR_HEIGHT / 2 - 200));
 
 	GameTitle->SetColor({ 0.2f , 0.5f, 0.8f});
-	Start->SetColor({ 0.2f , 0.5f, 0.8f });
 	GameTitle->SetScale(1.0f);
+	Start->SetColor({ 0.2f , 0.5f, 0.8f });
 	Start->SetScale(0.5f);
+	GameStatus->SetColor({ 0.2f , 0.8f, 0.9f });
+	GameStatus->SetScale(1.0f);
 
 	m_mTextList["Title"] = std::move(GameTitle);
 	m_mTextList["Start"] = std::move(Start);
+	m_mTextList["Status"] = std::move(GameStatus);
+
 }
 
 void CLevel::addBlocks(Utility::Tags _tag, b2BodyType _type, Utility::Transform transform, int _Health, int iWidth, int iHeight)

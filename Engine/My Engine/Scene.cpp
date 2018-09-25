@@ -45,15 +45,17 @@ void CScene::render()
 		it->Render2D(CUtility::program);
 	}
 
+	for (auto it : m_vBirdsInScene)
+	{
+		it->Render2D(CUtility::program);
+	}
+
 	for (auto it : m_mTextList)
 	{
 		it.second->Render();
 	}
 
-	for (auto it : m_vBirdsInScene)
-	{
-		it->Render2D(CUtility::program);
-	}
+	
 }
 
 void CScene::update()
@@ -131,4 +133,9 @@ std::shared_ptr<CBird> CScene::GetCurrentBird()
 		return m_vBirdsInScene[0];
 	}
 	return NULL;
+}
+
+void CScene::ChangeText(std::string _textName, std::string _text)
+{
+	m_mTextList.find(_textName)->second->SetText(_text);
 }

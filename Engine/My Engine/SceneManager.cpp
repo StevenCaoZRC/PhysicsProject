@@ -65,13 +65,22 @@ void CSceneManager::UpdateCurrent()
 	{
 		if (nCurrentScene == 1)
 		{
+			Scenes[2]->SetGameLost(false);
+			Scenes[2]->ChangeText("Status", "Game Won");
+
 			ResetScenes();
+			switchScene(2);
 		}
-		switchScene(nCurrentScene+1);
+		else
+		{
+			switchScene(1);
+		}
 	}
 	else if (Scenes[nCurrentScene]->GetGameLost())
 	{
 		Scenes[2]->SetGameLost(false);
+		Scenes[2]->ChangeText("Status", "Game Lost");
+
 		switchScene(2);
 		ResetScenes();
 	}

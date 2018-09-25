@@ -57,13 +57,12 @@ public:
 
 	void SetGameLost(bool _lost) { m_bGameLost = _lost; }
 	bool GetGameLost() { return m_bGameLost; }
+	void ChangeText(std::string _text, std::string _status);
 
 protected:
 	int enemyCount = 0;
 	bool m_bGameLost = false;
-
-private: 
-	int sceneNumber = 0;
+private:
 
 };
 
