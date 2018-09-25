@@ -51,8 +51,8 @@ void CEntity::CreateEntity2D(const char * _filePath, int iWidth, int iHeight)
 			SOIL_LOAD_RGBA);
 		SOIL_free_image_data(image);
 
-		HalfWidth = nWidth;
-		HalfHeight = nHeight;
+		HalfWidth = (int)nWidth;
+		HalfHeight = (int)nHeight;
 	}
 	GLfloat vertices[36] = {
 		// Position			 //Colour			 //Tex Coords
