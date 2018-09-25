@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{2368286f-1e0a-4e21-95a3-be80d7d2dfd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{cc6a3e76-e011-4eac-80ba-53dbbcf4fdc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Engine\Shaders\BlinnPhong">
+      <UniqueIdentifier>{7f88e911-0542-47e6-9fc7-08bf9e4124a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\BlinnPhongModel">
+      <UniqueIdentifier>{89e41abd-2209-471a-bfb9-6630a2577507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\CubeMap">
+      <UniqueIdentifier>{8bf0a3a5-72dc-449e-99b9-10cdfa1c5e5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\Fog">
+      <UniqueIdentifier>{9cab1a0e-288b-4f94-b174-b27fff60f276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\Light">
+      <UniqueIdentifier>{4173af13-eb8c-4008-996b-0fb5c36540c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\Model">
+      <UniqueIdentifier>{c7c79f7a-f9e7-490c-9a07-e82370e16612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\Reflection">
+      <UniqueIdentifier>{1e33fd6c-e308-4662-a9d5-2dc4757587d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\Text">
+      <UniqueIdentifier>{fa509b7d-dee7-4401-99d7-99582d8f7b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaders\2D&amp;3D">
+      <UniqueIdentifier>{407663e2-09cf-4e31-b349-cfd44ecf5e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{d0ef2ed5-e837-4cdc-b371-1fb349ee53f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shaderloader">
+      <UniqueIdentifier>{991bee82-b31d-4323-9550-06067a0c39dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\TextureLoader">
+      <UniqueIdentifier>{3b19b816-4d9f-4084-9e67-15a8e636517f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{25802e1b-ba31-4f41-a88b-0502247a0deb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Interface">
+      <UniqueIdentifier>{30d0ce6b-4cf3-4797-8c16-cfb69287dd73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\TextLabel">
+      <UniqueIdentifier>{bab1a740-d630-4e8f-86fb-142255cd17e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Controls">
+      <UniqueIdentifier>{d780b300-d756-4bd0-a0f7-64481d4e88a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager">
+      <UniqueIdentifier>{9207a516-617c-465e-b4da-7fe57916a5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{7f313bbc-cc56-4ea4-a497-b31a89f0c4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Sound">
+      <UniqueIdentifier>{c2593e77-d2cf-4e42-a75e-945792003c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utility">
+      <UniqueIdentifier>{a4fd56f5-9ef8-421a-a348-4109862ef21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{a6b2659e-54a6-4079-8ee4-1dc69ea58b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Birds">
+      <UniqueIdentifier>{c74bb30b-3e01-4ace-890a-e2847157eade}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Engine\Shaderloader</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls.cpp">
+      <Filter>Engine\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Engine\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TextLabel.cpp">
+      <Filter>Engine\TextLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Bird.cpp">
+      <Filter>Game\Birds</Filter>
+    </ClCompile>
+    <ClCompile Include="Blocks.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\FragmentShader.txt">
+      <Filter>Engine\Shaders\2D&amp;3D</Filter>
+    </Text>
+    <Text Include="Shaders\VertexShader.txt">
+      <Filter>Engine\Shaders\2D&amp;3D</Filter>
+    </Text>
+    <Text Include="Shaders\BlinnPhongFragShader.txt">
+      <Filter>Engine\Shaders\BlinnPhong</Filter>
+    </Text>
+    <Text Include="Shaders\BlinnPhongVertShader.txt">
+      <Filter>Engine\Shaders\BlinnPhong</Filter>
+    </Text>
+    <Text Include="Shaders\BlinnPhongModelFrag.txt">
+      <Filter>Engine\Shaders\BlinnPhongModel</Filter>
+    </Text>
+    <Text Include="Shaders\BlinnPhongModelVert.txt">
+      <Filter>Engine\Shaders\BlinnPhongModel</Filter>
+    </Text>
+    <Text Include="Shaders\CubeMapFrag.txt">
+      <Filter>Engine\Shaders\CubeMap</Filter>
+    </Text>
+    <Text Include="Shaders\CubeMapVert.txt">
+      <Filter>Engine\Shaders\CubeMap</Filter>
+    </Text>
+    <Text Include="Shaders\FogFragment.txt">
+      <Filter>Engine\Shaders\Fog</Filter>
+    </Text>
+    <Text Include="Shaders\FogVertexShader.txt">
+      <Filter>Engine\Shaders\Fog</Filter>
+    </Text>
+    <Text Include="Shaders\LightFragment.txt">
+      <Filter>Engine\Shaders\Light</Filter>
+    </Text>
+    <Text Include="Shaders\LightVertexShader.txt">
+      <Filter>Engine\Shaders\Light</Filter>
+    </Text>
+    <Text Include="Shaders\ModelFragShader.txt">
+      <Filter>Engine\Shaders\Model</Filter>
+    </Text>
+    <Text Include="Shaders\ModelVertShader.txt">
+      <Filter>Engine\Shaders\Model</Filter>
+    </Text>
+    <Text Include="Shaders\ReflectionFrag.txt">
+      <Filter>Engine\Shaders\Reflection</Filter>
+    </Text>
+    <Text Include="Shaders\ReflectionVert.txt">
+      <Filter>Engine\Shaders\Reflection</Filter>
+    </Text>
+    <Text Include="Shaders\TextFragment.txt">
+      <Filter>Engine\Shaders\Text</Filter>
+    </Text>
+    <Text Include="Shaders\TextVertex.txt">
+      <Filter>Engine\Shaders\Text</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Engine\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Engine\Shaderloader</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls.h">
+      <Filter>Engine\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Engine\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="TextLabel.h">
+      <Filter>Engine\TextLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Bird.h">
+      <Filter>Game\Birds</Filter>
+    </ClInclude>
+    <ClInclude Include="Blocks.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
