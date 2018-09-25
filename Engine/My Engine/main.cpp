@@ -56,6 +56,8 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.0, 1.0, 0.0, 1.0);//clears a colour
+
+
 	CSceneManager::GetInstance()->RenderCurrent();
 	//cout << "rendering" << endl;
 	//CInterface::GetInstance()->render();

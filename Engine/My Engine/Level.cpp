@@ -51,13 +51,13 @@ void CLevel::addPlayer()
 	auto bird1 = std::make_shared<CBird>();
 	bird1->InitBird(Utility::BIRD);
 	bird1->SetPos({ -7.0f, 0.0f, 0.0f });
-	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
 	m_vBirdsInScene.push_back(bird1);
 
 	auto bird2 = std::make_shared<CBird>();
 	bird2->InitBird(Utility::FASTBIRD);
 	bird2->SetPos({ -8.0f, -4.0f, 0.0f });
-	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
+	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true, 0.4f);
 	m_vBirdsInScene.push_back(bird2);
 }
 
@@ -487,7 +487,7 @@ void CContactListener::BeginContact(b2Contact * contact)
 				Pig->iHealth-=1;
 				cout << "PigCollided" << endl;
 			}
-			else if (Block &&( Entity2->GetEntityType() != Utility::WOODBOX && Entity2->GetEntityType() != Utility::PIG) || Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::TRIPLEBIRD)
+			else if (Block &&( Entity2->GetEntityType() != Utility::WOODBOX && Entity2->GetEntityType() != Utility::PIG) || Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::BIGBIRD)
 			{
 				Block->iHealth--;
 				cout << "BlockCollided" << endl;
@@ -511,7 +511,7 @@ void CContactListener::BeginContact(b2Contact * contact)
 				Pig->iHealth--;
 				cout << "PigCollided" << endl;
 			}
-			else if (Block && (Entity1->GetEntityType() != Utility::WOODBOX && Entity1->GetEntityType() != Utility::PIG)|| Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::TRIPLEBIRD)
+			else if (Block && (Entity1->GetEntityType() != Utility::WOODBOX && Entity1->GetEntityType() != Utility::PIG)|| Entity1->GetEntityType() == Utility::BIRD || Entity1->GetEntityType() == Utility::FASTBIRD || Entity1->GetEntityType() == Utility::BIGBIRD)
 			{
 				Block->iHealth--;
 				cout << "BlockCollided" << endl;

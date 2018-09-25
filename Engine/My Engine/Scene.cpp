@@ -54,8 +54,6 @@ void CScene::render()
 	{
 		it.second->Render();
 	}
-
-	
 }
 
 void CScene::update()
@@ -74,16 +72,6 @@ void CScene::update()
 		m_vBirdsInScene[index]->Update2D();
 		currentVecSize = m_vBirdsInScene.size();
 	}
-
-	/*for (auto it : V_EntitiesInScene)
-	{
-		it->Update2D();
-	}*/
-
-	/*for (auto it : m_vBirdsInScene)
-	{
-		it->Update2D();
-	}*/
 }
 
 void CScene::DeleteEntity(std::shared_ptr<CEntity> TobeDeleted)

@@ -154,7 +154,7 @@ void CEntity::Update2D()
 	
 }
 
-void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fDensity, float fFriction)
+void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shapes Shape, bool bRotatable, bool bHasFixture, float fRestitution, float fDensity, float fFriction)
 {
 	//Creating a body definition
 	b2BodyDef bodyDef;
@@ -190,6 +190,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 			fixtureDef.density = fDensity;
 			//Setting the friction
 			fixtureDef.friction = fFriction;
+			fixtureDef.restitution = fRestitution; // Make it bounce a little bit
 
 			//add this fixture to the body
 			bodyb2d->CreateFixture(&fixtureDef);
@@ -214,6 +215,7 @@ void CEntity::CreateB2Body(b2World& b2dWorld, b2BodyType BodyType, Utility::Shap
 			fixtureDef.density = fDensity;
 			//Setting the friction
 			fixtureDef.friction = fFriction;
+			fixtureDef.restitution = fRestitution;
 			//add this fixture to the body
 			bodyb2d->CreateFixture(&fixtureDef);
 		}
@@ -240,9 +242,9 @@ const char* CEntity::SelectSprite(Utility::Tags _tag)
 	{
 		return SPR_FASTBIRD;
 	}
-	else if (_tag == Utility::TRIPLEBIRD)
+	else if (_tag == Utility::BIGBIRD)
 	{
-		return SPR_TRIBIRD;
+		return SPR_BIGBIRD;
 	}
 	else if (_tag == Utility::WOODBOX)
 	{

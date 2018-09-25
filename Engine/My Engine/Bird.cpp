@@ -17,6 +17,7 @@
 #include "Sound.h"
 // This Includes //
 #include "Bird.h"
+#include "Controls.h"
 
 using namespace std;
 
@@ -63,22 +64,28 @@ void CBird::Attack()
 
 	if (m_bActivateAttack)
 	{
-		switch (GetEntityType())
+		if (CControls::cMouse[0] == Utility::INPUT_HOLD)
 		{
-		case Utility::Tags::FASTBIRD:
-		{
+			switch (GetEntityType())
+			{
+			case Utility::Tags::FASTBIRD:
+			{
 
-			break;
+				//bodyb2d->ApplyLinearImpulse();
+				break;
+			}
+			case Utility::Tags::BIGBIRD:
+			{
+
+				break;
+			}
+			default:
+			{
+				//Normal bird does nothing
+			}
+			}
 		}
-		case Utility::Tags::TRIPLEBIRD:
-		{
-			break;
-		}
-		default:
-		{
-			//Normal bird does nothing
-		}
-		}
+		
 	}
 }
 
