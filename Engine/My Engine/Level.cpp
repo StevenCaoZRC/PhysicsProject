@@ -33,6 +33,13 @@ CLevel::CLevel()
 	m_groundBody = world.CreateBody(&bodyDef);
 }
 
+CLevel::CLevel(int levelNum)
+{
+	m_iLevelNum = levelNum;
+	b2BodyDef bodyDef;
+	m_groundBody = world.CreateBody(&bodyDef);
+}
+
 // Destructor //
 CLevel::~CLevel()
 {
@@ -46,19 +53,14 @@ void CLevel::addPlayer()
 	bird1->SetPos({ -7.0f, 0.0f, 0.0f });
 	bird1->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird1);
-	m_pCurrentBird = bird1->GetBody();
 
 	auto bird2 = std::make_shared<CBird>();
 	bird2->InitBird(Utility::FASTBIRD);
-	bird2->SetPos({ 0.0f, 0.0f, 0.0f });
+	bird2->SetPos({ -8.0f, -4.0f, 0.0f });
 	bird2->CreateB2Body(world, b2_dynamicBody, Utility::CIRCLE, true, true);
 	m_vBirdsInScene.push_back(bird2);
 }
 
-void CLevel::addEnemy()
-{
-
-}
 
 void CLevel::addLevelObj()
 {
@@ -76,37 +78,16 @@ void CLevel::addLevelObj()
 	CircleofSling->init2D({ { -7.0f ,-2.9f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	//CircleofSling->CreateB2Body(world, b2_kinematicBody, Utility::POLYGON ,false, false);
 
-	//m_circleSling = CircleofSling->GetBody();
+	m_circleSling = CircleofSling;
 
 	std::shared_ptr<CEntity>StickofSling = make_shared<CEntity>();
 	StickofSling->CreateEntity2D("Resources/Stone elements/elementStone017.png", 45, 125);
-	StickofSling->init2D({ { -7.0f ,-4.1f,0.0f },{ 0,2.0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
+	StickofSling->init2D({ { -7.0f ,-4.18f,0.0f },{ 0,2.0,0 },{ 1.0f,1.0f,1.0f } }, Utility::INDESOBJECTS);
 	StickofSling->CreateB2Body(world, b2_staticBody, Utility::POLYGON, false, true);
 	AddEntity(Background);
 	AddEntity(StickofSling);
 	AddEntity(Floor);
 	AddEntity(CircleofSling);
-
-
-	//--------------------Adding Blocks to the Level--------------------//
-	//std::shared_ptr<CBlocks> Block;
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
-	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	//for rope to attach on to 
-	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	
-	//WORLD BLOCKS that prevent birds from flying out of screen
-	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
-	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
-	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
-	addBlocks(Utility::STONELONG, b2_staticBody, { { 0.0f ,6.5f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 1600, 80);
-
-	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
-	addRevoluteJoint(*GetEntity(Utility::STONELONG)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
-
 }
 
 void CLevel::addText()
@@ -119,6 +100,65 @@ void CLevel::addText()
 
 	m_mTextList["MouseX"] = std::move(xText);
 	m_mTextList["MouseY"] = std::move(yText);
+}
+
+void CLevel::addLevel1Objects()
+{
+	//--------------------Adding Blocks to the Level--------------------//
+	//std::shared_ptr<CBlocks> Block;
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
+	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	//for rope to attach on to 
+	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+
+	//WORLD BLOCKS that prevent birds from flying out of screen
+	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 0.0f ,6.5f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 1600, 80);
+
+	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addRevoluteJoint(*GetEntity(Utility::STONELONG)->GetBody(), *GetEntity(Utility::PIG)->GetBody());
+}
+
+void CLevel::addLevel2Objects()
+{
+	//--------------------Adding Blocks to the Level--------------------//
+	//std::shared_ptr<CBlocks> Block;
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 7.5f ,-4.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::WOODBOX, b2_dynamicBody, { { 3.5f ,-1.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 120, 80);
+	addBlocks(Utility::INDESOBJECTS, b2_dynamicBody, { { 5.5f ,1.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	//for rope to attach on to 
+	addBlocks(Utility::STONEROUND, b2_staticBody, { { -5.5f ,3.1f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+
+	//WORLD BLOCKS that prevent birds from flying out of screen
+	addBlocks(Utility::STONELONG, b2_staticBody, { { -10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 10.5f ,0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 80, 1000);
+	addBlocks(Utility::STONELONG, b2_staticBody, { { 0.0f ,6.5f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } }, 1, 1600, 80);
+
+	addEnemy(Utility::PIG, { { 7.5f , 0.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+	addEnemy(Utility::PIG, { { 5.5f , 2.0f,0.0f },{ 0,0,0 },{ 1.0f,1.0f,1.0f } });
+
+}
+
+void CLevel::addMainMenu()
+{
+	auto GameTitle = std::make_shared<TextLabel>("GRUMPY BIRDS", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH/2 - 225.0f, Utility::SCR_HEIGHT/2));
+	auto Start = std::make_shared<TextLabel>("Click anywhere to start", "Resources/Fonts/bubble.TTF", glm::vec2(Utility::SCR_WIDTH/2 - 200.0f, Utility::SCR_HEIGHT/2 - 100));
+
+	GameTitle->SetColor({ 0.2f , 0.5f, 0.8f});
+	Start->SetColor({ 0.2f , 0.5f, 0.8f });
+	GameTitle->SetScale(1.0f);
+	Start->SetScale(0.5f);
+
+	m_mTextList["Title"] = std::move(GameTitle);
+	m_mTextList["Start"] = std::move(Start);
 }
 
 void CLevel::addBlocks(Utility::Tags _tag, b2BodyType _type, Utility::Transform transform, int _Health, int iWidth, int iHeight)
@@ -135,6 +175,7 @@ void CLevel::addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Hea
 	Enemy->initEnemy(_tag, transform, _Health, iWidth, iHeight);
 	Enemy->SetPos({ 7.75f, 0.0f, 0.0f });
 	Enemy->CreateB2Body(world, b2_dynamicBody, Utility::POLYGON, true, true);
+	++enemyCount;
 	AddEntity(Enemy);
 }
 
@@ -187,21 +228,42 @@ void CLevel::update()
 	int32 positionInteration = 2;
 	world.Step(timeStep, velocityIteration, positionInteration);
 
-	m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(m_mouseWorld.x));
-	m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(m_mouseWorld.y));
-	ProcessMouse();
-	//if(m_revoluteBod!=NULL)
-	//m_revoluteBod->SetMotorSpeed(sinf(1.0f));
-
-	/*if (m_bJointConnected)
+	if (m_iLevelNum == 2)
 	{
-		float currentTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME) / 1000.0f);
-		if (currentTime - m_fOldTime > 2.0f && m_mousePressed == false)
+		//If Main Menu
+		//Handle one mouse click
+		if (CControls::cMouse[0] == Utility::INPUT_HOLD)
 		{
-			m_fOldTime = currentTime;
-			
+			m_bGameLost = true;
 		}
-	}*/
+	}
+	else
+	{
+		//If not Main Menu
+		m_mTextList.find("MouseX")->second->SetText("x: " + std::to_string(m_mouseWorld.x));
+		m_mTextList.find("MouseY")->second->SetText("y: " + std::to_string(m_mouseWorld.y));
+		ProcessMouse();
+		m_pCurrentBird = GetCurrentBird();
+		if (m_pCurrentBird != NULL)
+		{
+			if (!GetCurrentBird()->GetIsAlive())
+			{
+				world.DestroyBody(m_pCurrentBird->GetBody());
+				DeleteEntity(m_pCurrentBird);
+				if (m_vBirdsInScene.size() != 0)
+				{
+					GetCurrentBird()->GetBody()->SetTransform({ -7.0f, -3.0f }, 0.0f);
+				}
+				else
+				{
+					m_bGameLost = true;
+				}
+			}
+		}
+	}
+
+	
+	
 }
 
 void CLevel::resetLevel()
@@ -344,13 +406,22 @@ void CLevel::MouseUp(const b2Vec2& p)
 		std::cout << "MouseJoint Destroyed" << std::endl;
 		m_pMouseJoint = NULL;
 		
-		float32 vecX = (m_pCurrentBird->GetWorldCenter().x - p.x) * strength;
-		float32 vecY = (m_pCurrentBird->GetWorldCenter().y - p.x) * strength;
+		if (m_pCurrentBird!=NULL)
+		{
+			if (!m_pCurrentBird->GetIsFlung())
+			{
+				float32 vecX = (CircleofSling->GetPos().x - p.x) * 5.0f;
+				float32 vecY = (CircleofSling->GetPos().y - p.y) * 5.0f;
 
-		float32 tempvecX = (m_pCurrentBird->GetWorldCenter().x - p.x); // *strength;
-		float32 tempvecY = (m_pCurrentBird->GetWorldCenter().y - p.x);// * strength;
-		std::cout << tempvecX <<","<< tempvecY << std::endl;
-		m_pCurrentBird->ApplyLinearImpulse({ vecX,vecY }, m_currentBodyHeld->GetWorldCenter(), true);
+				float32 tempvecX = (m_pCurrentBird->GetBody()->GetWorldCenter().x - p.x); // *strength;
+				float32 tempvecY = (m_pCurrentBird->GetBody()->GetWorldCenter().y - p.y);// * strength;
+				std::cout << tempvecX << "," << tempvecY << std::endl;
+
+				m_pCurrentBird->GetBody()->ApplyLinearImpulse({ vecX,vecY }, m_currentBodyHeld->GetWorldCenter(), true);
+				m_pCurrentBird->SetFlung(true);
+			}
+		}
+		
 		//if (m_bJointConnected)
 		//{
 		//	m_bJointConnected = false;

@@ -66,6 +66,7 @@ void CScene::update()
 	}
 
 	currentVecSize = m_vBirdsInScene.size();
+
 	for (size_t index = 0; index < currentVecSize; ++index)
 	{
 		m_vBirdsInScene[index]->Update2D();
@@ -120,4 +121,14 @@ std::shared_ptr<CEntity> CScene::GetEntity(Utility::Tags _tag)
 		}
 	}
 	return nullptr;
+}
+
+//Gets first bird in the list
+std::shared_ptr<CBird> CScene::GetCurrentBird()
+{
+	if (m_vBirdsInScene.size() != 0)
+	{
+		return m_vBirdsInScene[0];
+	}
+	return NULL;
 }

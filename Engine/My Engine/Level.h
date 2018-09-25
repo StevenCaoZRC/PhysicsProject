@@ -21,7 +21,6 @@
 #include "Utility.h"
 // Local Includes //
 #include "Scene.h"
-#include "Bird.h"
 
 //#include"TextLabel.h"
 #include"TextLabel.h"
@@ -43,11 +42,16 @@ class CLevel : public CScene
 	// Member Functions //
 public:
 	CLevel();
+	CLevel(int levelNum);
+
 	~CLevel();
 	void addPlayer();
-	void addEnemy();
 	void addLevelObj();
 	void addText();
+	void addLevel1Objects();
+	void addLevel2Objects();
+	void addMainMenu();
+
 	void addBlocks(Utility::Tags _tag, b2BodyType _type, Utility::Transform transform, int _Health = 1 , int iWidth = 80, int iHeight = 80);
 	void addEnemy(Utility::Tags _tag, Utility::Transform transform, int _Health = 1, int iWidth = 80, int iHeight = 80);
 	void addDistanceJoint(b2Body& _body1, b2Body& _body2);
@@ -79,15 +83,14 @@ private:
 	b2MouseJoint* m_pMouseJoint = NULL;
 	b2Body* m_groundBody = NULL;
 	b2Body* m_currentBodyHeld = NULL;
-	b2Body* m_circleSling = NULL;
-	b2Body* m_pCurrentBird = NULL;
+	std::shared_ptr<CEntity> m_circleSling = NULL;
+	std::shared_ptr<CBird> m_pCurrentBird = NULL;
 	b2RevoluteJoint* m_revoluteBod = NULL;
 
 	b2DistanceJoint* m_pDistJoint;
 
 	float m_fOldTime = 0.0f;
-	//float m_fOldTime;
-
+	int m_iLevelNum;
 };
 
 #endif // _CLEVEL_H__

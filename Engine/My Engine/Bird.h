@@ -39,10 +39,17 @@ public:
 	void Update2D();
 
 	void Attack();
+	void SetFlung(bool _flung);
+	bool GetIsFlung() { return m_bFlung; }
+	bool GetIsAlive() { return m_bIsAlive; }
 
 private:
 	bool m_bIsAlive = true;
+	bool m_bFlung = false;
+
 	bool m_bActivateAttack = false;
+	float m_fOldDeathTime = 0.0f;
+	float m_fTimeTilDeath = 5.0f;
 
 };
 
